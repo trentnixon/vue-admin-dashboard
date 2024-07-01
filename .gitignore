@@ -122,3 +122,13 @@ dist/
 
 # Windows
 Thumbs.db
+
+# Test related files and directories
+coverage/
+test-results/
+junit-report.xml
+*.test.js
+*.test.ts
+tests/
+cypress/
+jest/
