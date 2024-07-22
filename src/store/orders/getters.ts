@@ -6,6 +6,9 @@ export const orders = computed(() => usePrivateOrdersState().orders);
 export const accountOrders = computed(
   () => usePrivateOrdersState().accountOrders
 );
+export const selectedAccountOrders = computed(
+  () => usePrivateOrdersState().selectedAccountOrders
+);
 export const loading = computed(() => usePrivateOrdersState().loading);
 export const error = computed(() => usePrivateOrdersState().error);
 
@@ -76,7 +79,7 @@ export const subscriptionTierBreakdown = computed(() => {
 });
 
 export const accountOrdersDetails = computed(() => {
-  const allOrders = accountOrders.value;
+  const allOrders = selectedAccountOrders.value;
 
   const orderDetails = allOrders.map((order) => {
     const { Name, startOrderAt, endOrderAt, total, subscription_tier, isActive } = order.attributes;

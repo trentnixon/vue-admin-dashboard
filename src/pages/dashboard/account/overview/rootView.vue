@@ -4,7 +4,7 @@
       {{ title }}
     </template>
   </ViewTitleBanner>
-<ActiveOrderCard />
+
   <AccountStatus />
   <ProfileStatusGrid />
 
@@ -26,8 +26,6 @@ import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
 import AccountStatus from "@/pages/dashboard/account/overview/components/AccountStatus.vue";
 import ProfileStatusGrid from "@/pages/dashboard/account/overview/components/ProfileStatusGrid.vue";
 import ContainerBlueGreyLighten2 from "@/components/common/containers/ContainerBlueGreyLighten2.vue";
-
-import ActiveOrderCard from "@/pages/dashboard/account/overview/components/ActiveOrderCard.vue";
 
 import { ref } from "vue";
 

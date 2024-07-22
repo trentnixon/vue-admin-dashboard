@@ -55,7 +55,7 @@
 // Pinia
 import { storeToRefs } from "pinia";
 // Vue
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, computed, watch } from "vue";
 // Vue Router
 import { useRoute, useRouter } from "vue-router";
 // Stores
@@ -74,11 +74,10 @@ const secondaryColor = ref("#000000");
 const displayLogo = ref("@/assets/logo.png");
 
 const accountStore = useAccountStore();
-const orderStore = useOrdersStore()
+const orderStore = useOrdersStore();
 const accountId = Number(route.params.id);
 const { accountDetails, getOrganizationDetails, getAccountTheme } =
   storeToRefs(accountStore);
-
 
 const associationStore = useAssociationStore();
 const { getAssociation } = storeToRefs(associationStore);
@@ -97,13 +96,14 @@ const handleClick = (emailAddress: string) => {
 
 onMounted(() => {
   accountStore.fetchAccountDetails(accountId);
-  orderStore.fetchAccountOrders(accountId)
+  console.log("get orders for ", accountId);
+  orderStore.fetchOrdersForSelectedAccount(accountId);
 });
 
 watch(accountDetails, (newDetails) => {
   if (newDetails) {
-    organisationName.value = newDetails.attributes.FirstName || "";
-    sport.value = newDetails.attributes.Sport || "";
+    organisationName.value = newDetails?.attributes?.FirstName || "";
+    sport.value = newDetails?.attributes?.Sport || "";
 
     const organization = getOrganizationDetails.value;
     if (organization) {
@@ -125,7 +125,7 @@ watch(getAccountTheme, (newTheme) => {
 
 watch(getAssociation, (newAssociation) => {
   if (newAssociation) {
-    displayLogo.value = newAssociation.attributes.Logo.data.attributes.url;
+    displayLogo.value = newAssociation?.attributes.Logo.data.attributes.url;
   }
 });
 
@@ -163,6 +163,13 @@ const navItems = ref([
 const navigateTo = (path: string) => {
   router.push(path);
 };
+
+// Computed properties
+const { accountOrdersDetails } = storeToRefs(orderStore);
+
+const activeOrderDetails = computed(() => {
+  return accountOrdersDetails.value.ActiveOrderDetails;
+});
 </script>
 
 <style scoped>

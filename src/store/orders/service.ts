@@ -14,3 +14,8 @@ export async function fetchOrderDetailsFromService(id: number): Promise<ApiRespo
   const response = await fetcher.get<ApiResponse<Order>>(`/orders/${id}?populate=*`);
   return response;
 }
+
+export async function fetchOrdersByAccountIdFromService(accountId: number): Promise<ApiResponse<Order[]>> {
+  const response = await fetcher.get<ApiResponse<Order[]>>(`/orders?filters[account][id][$eq]=${accountId}&populate=*`);
+  return response;
+}

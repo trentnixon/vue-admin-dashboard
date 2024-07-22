@@ -1,59 +1,35 @@
 <template>
-  <ContainerWithBorder>
-    <ContainerBlueGreyLighten2>
-      <v-container>
-        <v-row>
-          <v-col
-            v-for="(card, index) in cardTitles"
-            :key="index"
-            cols="12"
-            sm="6"
-            lg="4"
-            xl="3"
-          >
-            <BaseCard>
-              <template #title>
-                <span>{{ card.title }}</span>
-              </template>
-              <template #subtitle>
-                <span>Subtitle for Profile</span>
-              </template>
-              <template #text>
-                <span>Content for Profile</span>
-              </template>
-              <template #actions>
-                <OutlinedButton icon="mdi-home" @click="handleClick"
-                  >View</OutlinedButton
-                >
-              </template>
-            </BaseCard>
-          </v-col>
-        </v-row>
-      </v-container>
-    </ContainerBlueGreyLighten2>
-  </ContainerWithBorder>
+  <SectionContainerWithTitle>
+    <template #title></template>
+    <template #content>
+      <v-row>
+        <v-col cols="3">
+          <CardSmall1DataPoint
+            :icon="'mdi-receipt'"
+            :value="accountOrdersDetails.TotalNum"
+            subtitle="Orders"
+            buttonText="Orders"
+            @click="goToOrders"
+          />
+        </v-col>
+        <v-col cols="3">Renders</v-col>
+        <v-col cols="3">Fixtures</v-col>
+      </v-row>
+    </template>
+  </SectionContainerWithTitle>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import BaseCard from "@/components/common/cards/BaseCard.vue";
-import OutlinedButton from "@/components/common/buttons/OutlinedButton.vue";
-import ContainerWithBorder from "@/components/common/containers/ContainerWithBorder.vue";
-import ContainerBlueGreyLighten2 from "@/components/common/containers/ContainerBlueGreyLighten2.vue";
+import { useOrdersStore } from "@/store/orders";
+import CardSmall1DataPoint from "@/components/common/cards/CardSmall1DataPoint.vue";
+import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
+import { storeToRefs } from "pinia";
 
-const cardTitles = ref([
-  {
-    title: "Orders",
-  },
-  {
-    title: "Renders",
-  },
-  {
-    title: "Fixtures",
-  },
-]);
+const ordersStore = useOrdersStore();
+//const { accountOrdersDetails } = storeToRefs(ordersStore);
+const { accountOrdersDetails } = storeToRefs(ordersStore);
 
-const handleClick = () => {
+const goToOrders = () => {
   console.log("Button clicked");
 };
 </script>

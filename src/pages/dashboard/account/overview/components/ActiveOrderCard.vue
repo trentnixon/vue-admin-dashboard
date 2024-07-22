@@ -1,6 +1,6 @@
 <template>
     <v-card class="mx-auto mb-4">
-      <v-card-title>Active Order</v-card-title>
+      <v-card-title>Active Order </v-card-title>
       <v-card-subtitle>
         <div v-if="activeOrder">
           <p><strong>Order Name:</strong> {{ activeOrder.Name }}</p>
@@ -21,7 +21,6 @@
 
   const ordersStore = useOrdersStore();
   const { accountOrdersDetails } = storeToRefs(ordersStore);
-  console.log("accountOrdersDetails ", accountOrdersDetails)
 
   const activeOrder = computed(() => accountOrdersDetails.value.ActiveOrderDetails);
   </script>
