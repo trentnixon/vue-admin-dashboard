@@ -68,7 +68,9 @@
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
         </template>
         <template v-slot:item.hasCompletedStartSequence="{ item }">
-          <v-icon color="success" v-if="item.attributes.hasCompletedStartSequence"
+          <v-icon
+            color="success"
+            v-if="item.attributes.hasCompletedStartSequence"
             >mdi-check-circle</v-icon
           >
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
@@ -112,8 +114,9 @@ const { accounts, accountCount } = storeToRefs(accountStore);
 const search = ref("");
 
 const headers = [
-  /* { title: "First Name", value: "FirstName", align: "start" }, */
-  { title: "Association/Club", value: "associations", align: "start" },
+  { title: "First Name", value: "FirstName", align: "start" },
+  { title: "Club", value: "clubs", align: "start" },
+  { title: "Association", value: "associations", align: "start" },
   { title: "Type", value: "account_type", align: "start" },
   { title: "Sport", value: "Sport", align: "start" },
 
@@ -127,7 +130,6 @@ const headers = [
 
 const router = useRouter();
 
-
 const viewAccount = (id: number) => {
   router.push(`/dashboard/account/${id}/home`);
 };
@@ -135,22 +137,23 @@ const viewAccount = (id: number) => {
 const filteredAccounts = computed(() => {
   return accounts.value.filter((account) => {
     const searchTerm = search.value.toLowerCase();
+    const firstName = account.attributes.FirstName || "";
+    const sport = account.attributes.Sport || "";
+    const accountType =
+      account.attributes.account_type?.data?.attributes?.Name || "";
+    const associationName =
+      account.attributes.associations?.data[0]?.attributes?.Name || "";
+    const clubName = account.attributes.clubs?.data[0]?.attributes?.Name || "";
+
     return (
-      (account.attributes.FirstName || "").toLowerCase().includes(searchTerm) ||
-      account.attributes.Sport.toLowerCase().includes(searchTerm) ||
-      account.attributes.account_type?.data.attributes.Name.toLowerCase().includes(
-        searchTerm
-      ) ||
-      (account.attributes.associations?.data[0]?.attributes.Name || "").toLowerCase().includes(
-        searchTerm
-      ) ||
-      (account.attributes.clubs?.data[0]?.attributes.Name || "").toLowerCase().includes(
-        searchTerm
-      )
+      firstName.toLowerCase().includes(searchTerm) ||
+      sport.toLowerCase().includes(searchTerm) ||
+      accountType.toLowerCase().includes(searchTerm) ||
+      associationName.toLowerCase().includes(searchTerm) ||
+      clubName.toLowerCase().includes(searchTerm)
     );
   });
 });
-
 </script>
 
 <style scoped>
