@@ -136,20 +136,21 @@ const filteredAccounts = computed(() => {
   return accounts.value.filter((account) => {
     const searchTerm = search.value.toLowerCase();
     return (
-      account.attributes.FirstName.toLowerCase().includes(searchTerm) ||
+      (account.attributes.FirstName || "").toLowerCase().includes(searchTerm) ||
       account.attributes.Sport.toLowerCase().includes(searchTerm) ||
       account.attributes.account_type?.data.attributes.Name.toLowerCase().includes(
         searchTerm
       ) ||
-      account.attributes.associations?.data[0]?.attributes.Name.toLowerCase().includes(
+      (account.attributes.associations?.data[0]?.attributes.Name || "").toLowerCase().includes(
         searchTerm
       ) ||
-      account.attributes.clubs?.data[0]?.attributes.Name.toLowerCase().includes(
+      (account.attributes.clubs?.data[0]?.attributes.Name || "").toLowerCase().includes(
         searchTerm
       )
     );
   });
 });
+
 </script>
 
 <style scoped>
