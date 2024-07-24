@@ -1,5 +1,6 @@
 import { computed } from "vue";
 import { usePrivateDataCollectionState } from "./private";
+import { format } from "date-fns";
 
 //
 export const dataCollections = computed(
@@ -42,9 +43,12 @@ export const accountDataCollectionSummary = computed(() => {
   const averageTime = totalTime / totalCollections;
 
   const piechartArray = collections.map((item) => ({
-    name: item.attributes.whenWasTheLastCollection,
-    value: item.attributes.MemoryUsage,
-  }));
+    name: format(
+      new Date(item.attributes.whenWasTheLastCollection),
+      "dd/MM/yyyy HH:mm:ss"
+    ),
+    value: item.attributes.TimeTaken / 60000,
+  })).slice(0, 25);
 
   return { averageTime, piechartArray };
 });
@@ -68,7 +72,7 @@ export const accountMemoryTrackingSummary = computed(() => {
   const piechartArray = collections.map((item) => ({
     name: item.attributes.whenWasTheLastCollection,
     value: item.attributes.MemoryUsage,
-  }));
+  })).slice(0, 25);
 
   return { averageMemory, piechartArray };
 });

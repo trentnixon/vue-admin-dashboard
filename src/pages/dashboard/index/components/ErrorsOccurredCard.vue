@@ -5,6 +5,7 @@
       subtitle="Errors Occurred"
       buttonText="View Errors"
       @click="goToErrors"
+      :theme="errorsCount === 0 ? 'cardNeutral' : 'carderror'"
     />
   </template>
 

@@ -5,6 +5,7 @@
       subtitle="Downloads Completed"
       buttonText="View Downloads"
       @click="goToDownloads"
+      :theme="downloadsCompleted === 0 ? 'cardNeutral' : 'cardsuccess'"
     />
   </template>
 

@@ -1,19 +1,16 @@
 <template>
-  <v-card>
-    <v-card-title>Free Trial Status</v-card-title>
-    <v-card-subtitle>
-      Status of Free Trials across all Accounts
-    </v-card-subtitle>
-
-    <v-card-text>
+  <SingleChartCard>
+    <template #title>Free Trial Status</template>
+    <template #subtitle> Status of Free Trials across all Accounts </template>
+    <template #chart>
       <BarChart
         :data="freeTrialData"
         :categories="freeTrialCategories"
         title="Free Trial Distribution"
         subtitle=""
       />
-    </v-card-text>
-  </v-card>
+    </template>
+  </SingleChartCard>
 </template>
 
 <script setup>
@@ -21,7 +18,7 @@ import { ref, watch, onMounted } from "vue";
 import { useAccountStore } from "@/store/account";
 import BarChart from "@/components/common/charts/BarChart.vue";
 import { storeToRefs } from "pinia";
-
+import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
 const accountStore = useAccountStore();
 const { freeTrialStatus } = storeToRefs(accountStore);
 

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto" color="cardNeutral" variant="flat">
     <v-card-title>Sign-Up Trend</v-card-title>
     <v-card-subtitle>Monthly Sign-Up Trend</v-card-subtitle>
 

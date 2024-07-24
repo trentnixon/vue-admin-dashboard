@@ -1,31 +1,34 @@
 <template>
   <v-row>
     <v-col cols="6">
-      <DataCollectionTimeTakenSummary />
+      <CardDataCollectionTimeTakenSummary />
     </v-col>
     <v-col cols="6">
-      <MemoryTrackingSummary />
+      <CardMemoryTrackingSummary />
     </v-col>
-
     <v-col cols="12">
-      <v-card class="my-4 bg-white" variant="outlined">
-        <v-toolbar class="bg-blue-grey-darken-2">
-          <v-toolbar-title class="d-flex justify-space-between">
-            <v-tabs v-model="tab" density="comfortable" grow>
-              <v-tab value="time" variant="tonal">Time Taken</v-tab>
-              <v-tab value="memory" variant="tonal">Memory Usage</v-tab>
-            </v-tabs>
-          </v-toolbar-title>
+      <SingleChartCard>
+        <template #title>Time Taken for Data Collections</template>
+        <template #subtitle
+          >Track the time taken for each data collection over time</template
+        >
+        <template #chart>
+          <v-toolbar flat class="px-4" color="secondary" rounded>
+            <v-toolbar-title class="d-flex justify-space-between">
+              <v-tabs v-model="tab" density="comfortable" grow>
+                <v-tab value="time" variant="tonal">Time Taken</v-tab>
+                <v-tab value="memory" variant="tonal">Memory Usage</v-tab>
+              </v-tabs>
+            </v-toolbar-title>
 
-          <v-select
-            v-model="selectedRange"
-            :items="dateRanges"
-            auto
-            class="pa-3"
-            variant="underlined"
-          ></v-select>
-        </v-toolbar>
-        <v-card-text>
+            <v-select
+              v-model="selectedRange"
+              :items="dateRanges"
+              auto
+              class="pa-3"
+              variant="underlined"
+            ></v-select>
+          </v-toolbar>
           <v-tabs-window v-model="tab">
             <v-tabs-window-item value="time">
               <LineChart
@@ -87,8 +90,8 @@
               >
             </v-tabs-window-item>
           </v-tabs-window>
-        </v-card-text>
-      </v-card>
+        </template>
+      </SingleChartCard>
     </v-col>
   </v-row>
 </template>
@@ -98,11 +101,11 @@ import { ref, onMounted, watch } from "vue";
 import { useDataCollectionStore } from "@/store/dataCollection";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
-
+import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
 import { filterCollectionsForChart } from "@/utils/dateUtils";
 import dayjs from "dayjs";
-import DataCollectionTimeTakenSummary from "./DataCollectionTimeTakenSummary.vue";
-import MemoryTrackingSummary from "./MemoryTrackingSummary.vue";
+import CardDataCollectionTimeTakenSummary from "./CardDataCollectionTimeTakenSummary.vue";
+import CardMemoryTrackingSummary from "./CardMemoryTrackingSummary.vue";
 import LineChart from "@/components/common/charts/LineChart.vue";
 
 const route = useRoute();

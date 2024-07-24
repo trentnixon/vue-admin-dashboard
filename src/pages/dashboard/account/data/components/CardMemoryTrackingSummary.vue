@@ -1,31 +1,37 @@
 <template>
-  <v-card>
-    <v-card-title>Memory Tracking Summary</v-card-title>
-    <v-card-subtitle>
+  <SingleChartCard>
+    <template #title>Memory Tracking Summary</template>
+    <template #subtitle>
       Average Memory Usage:
       <span class="font-weight-black">{{
         displayAverageMemory.toFixed(2)
       }}</span>
-      MB
-    </v-card-subtitle>
-
-    <v-card-text>
+      MB</template
+    >
+    <template #chart>
       <PieChart
         :data="piechartData"
         :categories="categories"
         title="Memory Usage Distribution"
         subtitle="Memory usage of different collections"
       />
-    </v-card-text>
-  </v-card>
+    </template>
+  </SingleChartCard>
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import { useDataCollectionStore } from "@/store/dataCollection";
+// Structure
+import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
+
+// Components
 import PieChart from "@/components/common/charts/PieChart.vue";
+// Vue
+import { ref, watch } from "vue";
+// Pinia
+import { useDataCollectionStore } from "@/store/dataCollection";
 import { storeToRefs } from "pinia";
 
+// Data Collections
 const dataCollectionStore = useDataCollectionStore();
 const { accountMemoryTrackingSummary } = storeToRefs(dataCollectionStore);
 
@@ -47,9 +53,6 @@ watch(
   { immediate: true }
 );
 
-const handleClick = () => {
-  console.log("Button clicked");
-};
 </script>
 
 <style scoped></style>

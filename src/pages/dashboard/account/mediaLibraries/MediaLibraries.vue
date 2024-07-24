@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import MediaLibraries from "@/components/pages/dashboard/account/MediaLibraries.vue";
+import MediaLibraries from "@/pages/dashboard/account/mediaLibraries/Components/MediaLibraries.vue";
 import { ref } from "vue";
 
 const title = ref("Media Library");

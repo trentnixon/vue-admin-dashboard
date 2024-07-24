@@ -1,23 +1,23 @@
 <template>
-  <v-card>
-    <v-card-title>Active Orders</v-card-title>
-    <v-card-subtitle>
+  <SingleChartCard>
+    <template #title>Active Orders</template>
+    <template #subtitle>
       Ratio of Active Orders to No Active Orders
-    </v-card-subtitle>
-
-    <v-card-text>
+    </template>
+    <template #chart>
       <PieChart
         :data="activeOrdersData"
         :categories="activeOrdersCategories"
         title="Active Orders Distribution"
         subtitle=""
       />
-    </v-card-text>
-  </v-card>
+    </template>
+  </SingleChartCard>
 </template>
 
 <script setup>
 import { ref, watch, onMounted } from "vue";
+import SingleChartCard  from "@/components/common/cards/SingleChartCard.vue";
 import { useAccountStore } from "@/store/account";
 import PieChart from "@/components/common/charts/PieChart.vue";
 import { storeToRefs } from "pinia";

@@ -1,46 +1,45 @@
 <template>
-    <v-card class="mx-auto mb-4">
-      <v-card-title>Sports Distribution</v-card-title>
-      <v-card-subtitle>Distribution of Sports Among Accounts</v-card-subtitle>
+  <SingleChartCard>
+    <template #title>Sports Distribution</template>
+    <template #subtitle> Distribution of Sports Among Accounts </template>
+    <template #chart>
+      <BarChart
+        :data="sportsDistributionData.data"
+        :categories="sportsDistributionData.categories"
+        title="Sports Distribution"
+        subtitle="Distribution of Sports Among Accounts"
+        seriesName="Sports"
+      />
+    </template>
+  </SingleChartCard>
+</template>
+<script setup>
+import { ref, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useAccountStore } from "@/store/account";
+import BarChart from "@/components/common/charts/BarChart.vue";
+import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
 
-      <v-card-text>
-        <BarChart
-          :data="sportsDistributionData.data"
-          :categories="sportsDistributionData.categories"
-          title="Sports Distribution"
-          subtitle="Distribution of Sports Among Accounts"
-          seriesName="Sports"
-        />
-      </v-card-text>
-    </v-card>
-  </template>
+const accountStore = useAccountStore();
+const { sportsDistribution } = storeToRefs(accountStore);
 
-  <script setup>
-  import { ref, watch } from "vue";
-  import { storeToRefs } from "pinia";
-  import { useAccountStore } from "@/store/account";
-  import BarChart from "@/components/common/charts/BarChart.vue";
+const sportsDistributionData = ref({ categories: [], data: [] });
 
-  const accountStore = useAccountStore();
-  const { sportsDistribution } = storeToRefs(accountStore);
+watch(
+  sportsDistribution,
+  (newDistribution) => {
+    if (newDistribution) {
+      sportsDistributionData.value = newDistribution;
+    } else {
+      sportsDistributionData.value = { categories: [], data: [] };
+    }
+  },
+  { immediate: true }
+);
+</script>
 
-  const sportsDistributionData = ref({ categories: [], data: [] });
-
-  watch(
-    sportsDistribution,
-    (newDistribution) => {
-      if (newDistribution) {
-        sportsDistributionData.value = newDistribution;
-      } else {
-        sportsDistributionData.value = { categories: [], data: [] };
-      }
-    },
-    { immediate: true }
-  );
-  </script>
-
-  <style scoped>
-  .chart {
-    height: 300px;
-  }
-  </style>
+<style scoped>
+.chart {
+  height: 300px;
+}
+</style>

@@ -1,5 +1,5 @@
-<!-- eslint-disable vue/valid-v-slot -->
 <template>
+  <!-- eslint-disable vue/valid-v-slot -->
   <SectionContainerWithTitle>
     <template #title> Registered Accounts ({{ accountCount }}) </template>
     <template #content>
@@ -7,13 +7,14 @@
         :headers="headers"
         :items="filteredAccounts"
         :items-per-page="5"
-        class="elevation-1"
+        class="mx-auto"
         fixed-header
+        color="cardNeutral"
+        variant="flat"
+        rounded
       >
-        <template v-slot:top>
-          <v-toolbar flat class="px-4 bg-blue-grey-darken-1" rounded>
-            <v-toolbar-title> </v-toolbar-title>
-
+        <template #top>
+          <v-toolbar flat class="px-4" color="secondary" rounded>
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
@@ -27,73 +28,68 @@
             ></v-text-field>
           </v-toolbar>
         </template>
+        <template #item.LOGO="{ item }">
+          <v-avatar :image="item.LOGO" size="large"></v-avatar>
+        </template>
+        <template #item.FirstName="{ item }">
+          <span v-if="item.organizationType === 'Association'">
+            {{ item.associations }}
+          </span>
+          <span v-if="item.organizationType === 'Club'">
+            {{ item.clubs }}
+          </span>
+        </template>
 
-        <template v-slot:item.FirstName="{ item }">
-          {{ item.attributes.FirstName }}
+        <template #item.organizationType="{ item }">
+          {{ item.organizationType }}
         </template>
-        <template v-slot:item.isActive="{ item }">
-          <v-icon color="success" v-if="item.attributes.isActive"
+        <template #item.isActive="{ item }">
+          <v-icon color="success" v-if="item.isActive">mdi-check-circle</v-icon>
+          <v-icon color="warning" v-else>mdi-close-circle</v-icon>
+        </template>
+        <template #item.Sport="{ item }">
+          {{ item.Sport }}
+        </template>
+        <template #item.orders="{ item }">
+          <v-icon color="success" v-if="item.orders">mdi-check-circle</v-icon>
+          <v-icon color="warning" v-else>mdi-close-circle</v-icon>
+        </template>
+
+        <template #item.isSetup="{ item }">
+          <v-icon color="success" v-if="item.isSetup">mdi-check-circle</v-icon>
+          <v-icon color="warning" v-else>mdi-close-circle</v-icon>
+        </template>
+        <template #item.isUpdating="{ item }">
+          <v-icon color="success" v-if="item.isUpdating"
             >mdi-check-circle</v-icon
           >
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
         </template>
-        <template v-slot:item.Sport="{ item }">
-          {{ item.attributes.Sport }}
-        </template>
-        <template v-slot:item.orders="{ item }">
-          <v-icon color="success" v-if="item.attributes.orders?.data.length"
+        <template #item.hasCompletedStartSequence="{ item }">
+          <v-icon color="success" v-if="item.hasCompletedStartSequence"
             >mdi-check-circle</v-icon
           >
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
         </template>
-        <template v-slot:item.account_type="{ item }">
-          {{ item.attributes.account_type?.data.attributes.Name || "N/A" }}
-        </template>
-        <template v-slot:item.associations="{ item }">
-          {{ item.attributes.associations?.data[0]?.attributes.Name || "N/A" }}
-        </template>
-        <template v-slot:item.clubs="{ item }">
-          {{ item.attributes.clubs?.data[0]?.attributes.Name || "N/A" }}
-        </template>
-        <template v-slot:item.isSetup="{ item }">
-          <v-icon color="success" v-if="item.attributes.isSetup"
+        <template #item.isRightsHolder="{ item }">
+          <v-icon color="primary" v-if="item.isRightsHolder"
             >mdi-check-circle</v-icon
           >
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
         </template>
-        <template v-slot:item.isUpdating="{ item }">
-          <v-icon color="success" v-if="item.attributes.isUpdating"
+        <template #item.isPermissionGiven="{ item }">
+          <v-icon color="success" v-if="item.isPermissionGiven"
             >mdi-check-circle</v-icon
           >
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
         </template>
-        <template v-slot:item.hasCompletedStartSequence="{ item }">
-          <v-icon
-            color="success"
-            v-if="item.attributes.hasCompletedStartSequence"
+        <template #item.group_assets_by="{ item }">
+          <v-icon color="success" v-if="item.group_assets_by"
             >mdi-check-circle</v-icon
           >
           <v-icon color="warning" v-else>mdi-close-circle</v-icon>
         </template>
-        <template v-slot:item.isRightsHolder="{ item }">
-          <v-icon color="primary" v-if="item.attributes.isRightsHolder"
-            >mdi-check-circle</v-icon
-          >
-          <v-icon color="warning" v-else>mdi-close-circle</v-icon>
-        </template>
-        <template v-slot:item.isPermissionGiven="{ item }">
-          <v-icon color="success" v-if="item.attributes.isPermissionGiven"
-            >mdi-check-circle</v-icon
-          >
-          <v-icon color="warning" v-else>mdi-close-circle</v-icon>
-        </template>
-        <template v-slot:item.group_assets_by="{ item }">
-          <v-icon color="success" v-if="item.attributes.group_assets_by"
-            >mdi-check-circle</v-icon
-          >
-          <v-icon color="warning" v-else>mdi-close-circle</v-icon>
-        </template>
-        <template v-slot:item.actions="{ item }">
+        <template #item.actions="{ item }">
           <SecondaryButton @click="viewAccount(item.id)">View</SecondaryButton>
         </template>
       </v-data-table>
@@ -102,10 +98,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useAccountStore } from "@/store/account";
 import { storeToRefs } from "pinia";
+import { getFormattedAccounts } from "@/utils/accountObjUtils";
+
 import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
 import SecondaryButton from "@/components/common/buttons/SecondaryButton.vue";
 
@@ -114,17 +112,14 @@ const { accounts, accountCount } = storeToRefs(accountStore);
 const search = ref("");
 
 const headers = [
-  { title: "First Name", value: "FirstName", align: "start" },
-  { title: "Club", value: "clubs", align: "start" },
-  { title: "Association", value: "associations", align: "start" },
-  { title: "Type", value: "account_type", align: "start" },
+  { title: "Logo", value: "LOGO", align: "start" },
+  { title: "Organization", value: "FirstName", align: "start" },
+  { title: "Type", value: "organizationType", align: "start" },
   { title: "Sport", value: "Sport", align: "start" },
-
-  { title: "Active", value: "isActive", align: "center" },
-  { title: "Subscribed", value: "orders", align: "center" },
-
-  { title: "Setup Complete", value: "isSetup", align: "center" },
-  { title: "Updating", value: "isUpdating", align: "center" },
+  { title: "Active", value: "isActive", align: "center", icon: true },
+  { title: "Subscribed", value: "orders", align: "center", icon: true },
+  { title: "Setup", value: "isSetup", align: "center", icon: true },
+  { title: "Updating", value: "isUpdating", align: "center", icon: true },
   { title: "Actions", value: "actions", align: "start", sortable: false },
 ];
 
@@ -134,23 +129,15 @@ const viewAccount = (id: number) => {
   router.push(`/dashboard/account/${id}/home`);
 };
 
-const filteredAccounts = computed(() => {
-  return accounts.value.filter((account) => {
-    const searchTerm = search.value.toLowerCase();
-    const firstName = account.attributes.FirstName || "";
-    const sport = account.attributes.Sport || "";
-    const accountType =
-      account.attributes.account_type?.data?.attributes?.Name || "";
-    const associationName =
-      account.attributes.associations?.data[0]?.attributes?.Name || "";
-    const clubName = account.attributes.clubs?.data[0]?.attributes?.Name || "";
+const formattedAccounts = computed(() => getFormattedAccounts(accounts.value));
 
+const filteredAccounts = computed(() => {
+  return formattedAccounts.value.filter((account) => {
+    const searchTerm = search.value.toLowerCase();
     return (
-      firstName.toLowerCase().includes(searchTerm) ||
-      sport.toLowerCase().includes(searchTerm) ||
-      accountType.toLowerCase().includes(searchTerm) ||
-      associationName.toLowerCase().includes(searchTerm) ||
-      clubName.toLowerCase().includes(searchTerm)
+      account.FirstName.toLowerCase().includes(searchTerm) ||
+      account.associations.toLowerCase().includes(searchTerm) ||
+      account.clubs.toLowerCase().includes(searchTerm)
     );
   });
 });

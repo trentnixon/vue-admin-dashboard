@@ -23,12 +23,15 @@
 </template>
 
 <script setup lang="ts">
+// structure
 import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
-import DataCollectionTracking from "@/components/pages/dashboard/account/data/DataCollectionTracking.vue";
-import ResultCollectionTracking from "@/components/pages/dashboard/account/data/ResultCollectionTracking.vue";
-import MetaDataTracking from "@/components/pages/dashboard/account/data/MetaDataTracking.vue";
-import { useDataCollectionStore } from "@/store/dataCollection";
+// Components
+import DataCollectionTracking from "@/pages/dashboard/account/data/components/DataCollectionTracking.vue";
+import ResultCollectionTracking from "@/pages/dashboard/account/data/components/ResultCollectionTracking.vue";
+import MetaDataTracking from "@/pages/dashboard/account/data/components/MetaDataTracking.vue";
 
+// Pinia
+import { useDataCollectionStore } from "@/store/dataCollection";
 import { storeToRefs } from "pinia";
 
 const dataCollectionStore = useDataCollectionStore();

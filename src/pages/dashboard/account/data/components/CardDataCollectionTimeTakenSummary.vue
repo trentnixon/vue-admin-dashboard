@@ -1,29 +1,32 @@
 <template>
-  <v-card>
-    <v-card-title>Time Taken Summary</v-card-title>
-    <v-card-subtitle>
+  <SingleChartCard>
+    <template #title>Time Taken Summary</template>
+    <template #subtitle>
       Average Collection Time:
       <span class="font-weight-black">{{ displayAverageTime.toFixed(2) }}</span>
-      minutes
-    </v-card-subtitle>
-
-    <v-card-text>
-
+      minutes</template
+    >
+    <template #chart>
       <PieChart
         :data="piechartData"
         :categories="formattedCategories"
         title="Time Taken Distribution"
         subtitle=""
       />
-    </v-card-text>
-  </v-card>
+    </template>
+  </SingleChartCard>
 </template>
 
 <script setup>
+// Structure
+import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
+// Components
+import PieChart from "@/components/common/charts/PieChart.vue";
+// Pinia
+import { storeToRefs } from "pinia";
 import { ref, watch } from "vue";
 import { useDataCollectionStore } from "@/store/dataCollection";
-import PieChart from "@/components/common/charts/PieChart.vue";
-import { storeToRefs } from "pinia";
+// utils
 import { formatDate } from "@/utils/dateUtils";
 
 const dataCollectionStore = useDataCollectionStore();
@@ -40,18 +43,17 @@ watch(
     console.log("accountDataCollectionSummary updated: ", newSummary);
     if (newSummary) {
       const { averageTime, piechartArray } = newSummary;
-      displayAverageTime.value = (averageTime / 60000); // Convert ms to minutes
-      piechartData.value = piechartArray.map(item => item.value);
-      categories.value = piechartArray.map(item => formatDate(item.name));
-      formattedCategories.value = categories.value.map(date => formatDate(date));
+      displayAverageTime.value = averageTime / 60000; // Convert ms to minutes
+      piechartData.value = piechartArray.map((item) => item.value);
+      categories.value = piechartArray.map((item) => formatDate(item.name));
+      formattedCategories.value = categories.value.map((date) =>
+        formatDate(date)
+      );
+
     }
   },
   { immediate: true }
 );
-
-const handleClick = () => {
-  console.log("Button clicked");
-};
 </script>
 
 <style scoped>

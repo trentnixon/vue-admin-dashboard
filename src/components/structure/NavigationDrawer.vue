@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app   color="surface">
+  <v-navigation-drawer app  color="surface">
     <v-list>
       <v-list-item
         prepend-avatar="/android-chrome-192x192.png"

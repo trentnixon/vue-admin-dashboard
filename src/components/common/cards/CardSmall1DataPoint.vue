@@ -1,6 +1,11 @@
 <!-- src/components/common/cards/StatCard.vue -->
 <template>
-  <v-card class="mx-auto mb-3 " color="white" variant="flat" :subtitle="subtitle" >
+  <v-card
+    class="mx-auto mb-3"
+    :color="theme"
+    variant="flat"
+    :subtitle="subtitle"
+  >
     <template v-slot:append>
       <v-icon color="accent" :icon="icon"></v-icon>
     </template>
@@ -39,6 +44,10 @@ const props = defineProps({
   fontSize: {
     type: String,
     default: "36px",
+  },
+  theme: {
+    type: String,
+    default: "cardNeutral",
   },
 });
 

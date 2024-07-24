@@ -5,6 +5,7 @@
       subtitle="Over Night Renders"
       buttonText="View Renders"
       @click="goToRenders"
+      :theme="overnightRenders === 0 ? 'cardNeutral' : 'cardsuccess'"
     />
   </template>
 

@@ -1,43 +1,49 @@
 <template>
-  <v-card class="my-4">
-    <v-toolbar class="bg-blue-grey-darken-2">
-      <v-row class="w-100 ma-0 pa-0">
-        <v-col cols="6"> </v-col>
-        <v-col cols="6">
-          <v-select
-            v-model="selectedRange"
-            :items="dateRanges"
-            auto
-            class="pa-3"
-            variant="underlined"
-          ></v-select>
-        </v-col>
-      </v-row>
-    </v-toolbar>
-    <v-card-text>
+  <SingleChartCard>
+    <template #title>Result Collections Over Time</template>
+    <template #subtitle
+      >Track the number of result collections over time</template
+    >
+    <template #chart>
+      <v-toolbar flat class="px-4" color="secondary" rounded>
+        <v-row class="w-100 ma-0 pa-0">
+          <v-col cols="6"> </v-col>
+          <v-col cols="6">
+            <v-select
+              v-model="selectedRange"
+              :items="dateRanges"
+              auto
+              class="pa-3"
+              variant="underlined"
+            ></v-select>
+          </v-col>
+        </v-row>
+      </v-toolbar>
       <BarChart
         chartType="bar"
         :data="data"
         :categories="categories"
         title="Result Collections Over Time"
         subtitle="Track the number of result collections over time"
-    /></v-card-text>
-    <template v-slot:actions>
-      <v-container class="d-flex justify-end pa-0">
-        <SecondaryButton>CTA</SecondaryButton>
-      </v-container>
+      />
     </template>
-  </v-card>
+  </SingleChartCard>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import { useResultCollectionStore } from "@/store/resultCollection";
-import { useRoute } from "vue-router";
-import { storeToRefs } from "pinia";
-import { filterCollectionsByDate } from "@/utils/dateUtils";
-import SecondaryButton from "@/components/common/buttons/SecondaryButton.vue";
+// structure
+import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
+// Components
 import BarChart from "@/components/common/charts/BarChart.vue";
+//Vue
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+//Pinia
+import { storeToRefs } from "pinia";
+import { useResultCollectionStore } from "@/store/resultCollection";
+
+//Utils
+import { filterCollectionsByDate } from "@/utils/dateUtils";
 
 const route = useRoute();
 const accountId = Number(route.params.id);

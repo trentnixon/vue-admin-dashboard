@@ -5,6 +5,7 @@
       subtitle="Still Processing"
       buttonText="View Renders"
       @click="goToRenders"
+       :theme="rendersStillProcessing === 0 ? 'cardNeutral' : 'cardwarning'"
     />
   </template>
 

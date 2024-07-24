@@ -1,8 +1,8 @@
 export default {
   color: [
-    "#00897B", // teal darken-1
-    "#FF7043", // deep orange lighten-1 (coral)
-    "#4DB6AC", // teal lighten-2
+    "#0097A7", // teal darken-1
+    "#FF8D3E", // deep orange lighten-1 (coral)
+    "#498D7C", // teal lighten-2
     "#FFAB91", // light orange (peach)
     "#80CBC4", // teal lighten-3
     "#FF5722", // deep orange

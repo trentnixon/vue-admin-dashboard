@@ -16,7 +16,8 @@
         v-for="library in accountMediaLibraries"
         :key="library.id"
       >
-        <v-card min-width="100%">
+        <v-card min-width="100%" color="surface" variant="flat">
+          <v-card-title>{{ library.attributes.title }}</v-card-title>
           <v-img
             :lazy-src="library.attributes.imageId.data.attributes.url"
             :src="library.attributes.imageId.data.attributes.url"
@@ -33,7 +34,7 @@
               </v-row>
             </template>
           </v-img>
-          <v-card-title>{{ library.attributes.title }}</v-card-title>
+
           <v-card-subtitle>
             Age Group: {{ library.attributes.AgeGroup }}
           </v-card-subtitle>

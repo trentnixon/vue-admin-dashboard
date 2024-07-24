@@ -1,14 +1,6 @@
 <template>
-  <v-card
-    class="elevation-0 mx-auto mb-4 bg-grey-lighten-4"
-    color="blue-grey-lighten-2"
-    variant="tonal"
-  >
-    <v-card
-      class="elevation-0 my-2 mx-2 bg-blue-grey-lighten-1"
-      color="blue-grey-lighten-5"
-      variant="tonal"
-    >
+  <v-card class="elevation-0 mx-auto  mb-4 bg-grey-lighten-4" variant="tonal"  color="secondary">
+    <v-card class="elevation-0 my-1 mx-1 " variant="tonal" color="primary">
       <template v-slot:title>
         <slot name="title"></slot>
       </template>
