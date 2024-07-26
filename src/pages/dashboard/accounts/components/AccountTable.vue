@@ -142,9 +142,3 @@ const filteredAccounts = computed(() => {
   });
 });
 </script>
-
-<style scoped>
-.elevation-1 {
-  margin-bottom: 20px;
-}
-</style>

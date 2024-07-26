@@ -7,6 +7,7 @@ export interface PrivateRendersState {
   loading: boolean;
   error: string | null;
   schedulerId: number;
+  specificRenders: Render[];
 }
 
 export const usePrivateRendersState = defineStore("renders-private", {
@@ -16,5 +17,6 @@ export const usePrivateRendersState = defineStore("renders-private", {
     loading: false,
     error: null,
     schedulerId: 0,
+    specificRenders: [],
   }),
 });

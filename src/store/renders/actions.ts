@@ -1,5 +1,9 @@
 import { usePrivateRendersState } from "./private";
-import { fetchAllRendersFromService, fetchRenderFromService, fetchRendersBySchedulerIdFromService } from "./service";
+import {
+  fetchAllRendersFromService,
+  fetchRenderFromService,
+  fetchRendersBySchedulerIdFromService,
+} from "./service";
 
 export async function fetchRender(id: number) {
   const state = usePrivateRendersState();
@@ -24,9 +28,14 @@ export async function fetchRendersBySchedulerId(schedulerId: number) {
   try {
     state.loading = true;
     const response = await fetchRendersBySchedulerIdFromService(schedulerId);
+    console.log("response ", response, schedulerId)
     if (response && response.data) {
-      state.renders = response.data;
-      console.log("Fetched renders for scheduler ID: NEW :: ", schedulerId, state.renders);
+      state.specificRenders = response.data;
+      console.log(
+        "Fetched renders for scheduler ID: NEW :: ",
+        schedulerId,
+        state.specificRenders
+      );
     } else {
       throw new Error("Invalid data structure");
     }

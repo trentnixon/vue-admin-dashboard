@@ -6,6 +6,11 @@ export const renders = computed(() => usePrivateRendersState().renders);
 export const loading = computed(() => usePrivateRendersState().loading);
 export const error = computed(() => usePrivateRendersState().error);
 
+// Getter to fetch renders by scheduler ID
+export const getRendersBySchedulerId = computed(
+  () => usePrivateRendersState().specificRenders
+);
+
 export const RenderCount = computed(() => renders.value.length);
 export const firstTenRenders = computed(() => renders.value.slice(0, 10));
 export const getRenderById = (id: number) => {
@@ -27,34 +32,42 @@ export const renderActivitiesOverTime = computed(() => {
     };
   }).reverse();
 
-  renders.forEach(render => {
-    const renderMonth = format(new Date(render.attributes.updatedAt), "yyyy-MM");
-    const monthIndex = months.findIndex(month => month.month === renderMonth);
+  renders.forEach((render) => {
+    const renderMonth = format(
+      new Date(render.attributes.updatedAt),
+      "yyyy-MM"
+    );
+    const monthIndex = months.findIndex((month) => month.month === renderMonth);
     if (monthIndex !== -1) {
       months[monthIndex].count++;
     }
   });
 
   return {
-    categories: months.map(month => month.month),
-    data: months.map(month => month.count),
+    categories: months.map((month) => month.month),
+    data: months.map((month) => month.count),
   };
 });
-
 
 export const rendersInLast24Hours = computed(() => {
   const now = new Date();
   const yesterday = subDays(now, 1);
 
   return renders.value.filter((render) => {
-    const completeDate = render.attributes.Complete ? new Date(render.attributes.updatedAt) : null;
-    return completeDate && isWithinInterval(completeDate, { start: yesterday, end: now });
+    const completeDate = render.attributes.Complete
+      ? new Date(render.attributes.updatedAt)
+      : null;
+    return (
+      completeDate &&
+      isWithinInterval(completeDate, { start: yesterday, end: now })
+    );
   }).length;
 });
 
-
 export const rendersStillProcessing = computed(() => {
   return renders.value.filter(
-    (render) => render.attributes.Processing === true || render.attributes.Complete === false
+    (render) =>
+      render.attributes.Processing === true ||
+      render.attributes.Complete === false
   ).length;
 });

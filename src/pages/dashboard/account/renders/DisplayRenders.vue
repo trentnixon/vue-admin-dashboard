@@ -6,7 +6,42 @@
   </ViewTitleBanner>
   <SchedulerInformation />
   <RenderOverview />
-  <!--
+
+  <SectionContainerWithTitle>
+    <template #title> Render Metrics </template>
+    <template #content>
+      <v-row>
+        <v-col cols="8">
+          <ChartRendersTimeOfDay />
+          <!-- <ActiveOrdersPieChart /> -->
+        </v-col>
+        <v-col cols="4">
+          <ChartTimeComparison />
+        </v-col>
+      </v-row>
+    </template>
+  </SectionContainerWithTitle>
+</template>
+
+<script setup lang="ts">
+// vue
+import { ref } from "vue";
+
+// Pinia
+
+// Components
+import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
+import SchedulerInformation from "@/pages/dashboard/account/renders/components/SchedulerInformation.vue";
+import RenderOverview from "@/pages/dashboard/account/renders/components/RenderOverview.vue";
+import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
+import ChartRendersTimeOfDay from "@/pages/dashboard/account/renders/components/ChartRendersTimeOfDay.vue";
+import ChartTimeComparison from "@/pages/dashboard/account/renders/components/ChartTimeComparison.vue";
+
+// Vars
+const title = ref("Renders");
+</script>
+
+<!--
   Basic Information Name: render.attributes.Name Processing Status:
   render.attributes.Processing Completion Status: render.attributes.Complete
   Email Sent: render.attributes.EmailSent Additional Information Send Email:
@@ -53,15 +88,3 @@
   details such as name, grouping category, journalist, editor, bias, Open AI
   details (ID, created, tokens), completion status, force rerender, error
   status, and asset link ID. -->
-</template>
-
-<script setup lang="ts">
-import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import SchedulerInformation from "@/components/pages/dashboard/account/SchedulerInformation.vue";
-import RenderOverview from "@/components/pages/dashboard/account/RenderOverview.vue";
-
-import { ref } from "vue";
-
-// Vars
-const title = ref("Scheduler");
-</script>

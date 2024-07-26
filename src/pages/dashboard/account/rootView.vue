@@ -26,8 +26,9 @@
           <SecondaryButton
             size="x-small"
             @click="handleClick(accountDetails?.attributes.DeliveryAddress)"
-            >email</SecondaryButton
           >
+            email
+          </SecondaryButton>
         </p>
       </v-col>
 
@@ -54,67 +55,106 @@
 <script setup lang="ts">
 // Pinia
 import { storeToRefs } from "pinia";
-// Vue
-import { onMounted, ref, computed, watch } from "vue";
-// Vue Router
-import { useRoute, useRouter } from "vue-router";
 // Stores
 import { useAccountStore } from "@/store/account";
 import { useAssociationStore } from "@/store/associationStore/";
 import { useClubStore } from "@/store/clubStore/index";
-import SecondaryButton from "@/components/common/buttons/SecondaryButton.vue";
 import { useOrdersStore } from "@/store/orders";
+import { useSchedulerStore } from "@/store/scheduler";
+// Vue
+import { onMounted, ref, computed, watch } from "vue";
+// Vue Router
+import { useRoute, useRouter } from "vue-router";
+// Components
+import SecondaryButton from "@/components/common/buttons/SecondaryButton.vue";
+import { useRendersStore } from "@/store/renders";
 
-const route = useRoute();
+// Router
 const router = useRouter();
-const organisationName = ref(null);
-const sport = ref(null);
+const route = useRoute();
+const accountId = Number(route.params.id);
+
+// Constants
+const organisationName = ref("");
+const sport = ref("");
 const primaryColor = ref("#ffffff");
 const secondaryColor = ref("#000000");
 const displayLogo = ref("@/assets/logo.png");
 
+// Stores ===============================================================
+// Account
 const accountStore = useAccountStore();
-const orderStore = useOrdersStore();
-const accountId = Number(route.params.id);
 const { accountDetails, getOrganizationDetails, getAccountTheme } =
   storeToRefs(accountStore);
 
+// Orders
+const orderStore = useOrdersStore();
+
+// Organisations
 const associationStore = useAssociationStore();
 const { getAssociation } = storeToRefs(associationStore);
 
 const clubStore = useClubStore();
 const { getClub } = storeToRefs(clubStore);
 
-// handle events
+watch(getAssociation, (newAssociation) => {
+  if (newAssociation) {
+    displayLogo.value =
+      newAssociation?.attributes?.Logo?.data?.attributes?.url ||
+      displayLogo.value;
+  }
+});
 
-const handleClick = (emailAddress: string) => {
-  // got to email address
-  console.log("email clicked");
-  // handle mailto: emailAddress
-  window.location.href = `mailto:${emailAddress}`;
-};
+watch(getClub, (newClub) => {
+  if (newClub) {
+    displayLogo.value =
+      newClub?.attributes?.Logo?.data?.attributes?.url || displayLogo.value;
+  }
+});
 
+// Schedulers
+const schedulerStore = useSchedulerStore();
+const { getScheduler } = storeToRefs(schedulerStore);
+
+// Renders
+const rendersStore = useRendersStore();
+const { fetchRendersBySchedulerId } = rendersStore;
+
+// ===============================================================
+
+// LifeCycles
 onMounted(() => {
   accountStore.fetchAccountDetails(accountId);
-  console.log("get orders for ", accountId);
   orderStore.fetchOrdersForSelectedAccount(accountId);
 });
 
-watch(accountDetails, (newDetails) => {
-  if (newDetails) {
-    organisationName.value = newDetails?.attributes?.FirstName || "";
-    sport.value = newDetails?.attributes?.Sport || "";
+// Watchers
+watch(
+  accountDetails,
+  (newDetails) => {
+    if (newDetails) {
+      organisationName.value = newDetails?.attributes?.FirstName || "";
+      sport.value = newDetails?.attributes?.Sport || "";
 
-    const organization = getOrganizationDetails.value;
-    if (organization) {
-      if (organization.type === "Association") {
-        associationStore.fetchAssociation(organization.id);
-      } else if (organization.type === "Club") {
-        clubStore.fetchClub(organization.id);
+      const organization = getOrganizationDetails.value;
+      if (organization) {
+        if (organization.type === "Association") {
+          associationStore.fetchAssociation(organization.id);
+        } else if (organization.type === "Club") {
+          clubStore.fetchClub(organization.id);
+        }
+      }
+
+      const schedulerId = newDetails.attributes.scheduler?.data?.id;
+      if (schedulerId) {
+        console.log("Fetching Scheduler", schedulerId);
+        schedulerStore.fetchScheduler(schedulerId);
+        fetchRendersBySchedulerId(schedulerId);
       }
     }
-  }
-});
+  },
+  { immediate: true, deep: true }
+);
 
 watch(getAccountTheme, (newTheme) => {
   if (newTheme) {
@@ -123,17 +163,10 @@ watch(getAccountTheme, (newTheme) => {
   }
 });
 
-watch(getAssociation, (newAssociation) => {
-  if (newAssociation) {
-    displayLogo.value = newAssociation?.attributes.Logo.data.attributes.url;
-  }
-});
-
-watch(getClub, (newClub) => {
-  if (newClub) {
-    displayLogo.value = newClub.attributes.Logo.data.attributes.url;
-  }
-});
+// handle events
+const handleClick = (emailAddress: string) => {
+  window.location.href = `mailto:${emailAddress}`;
+};
 
 // Navigation items
 const navItems = ref([
@@ -152,7 +185,6 @@ const navItems = ref([
     title: "Data",
     to: `/dashboard/account/${accountId}/data`,
   },
-
   {
     icon: "mdi-cog",
     title: "medialibrary",
@@ -165,11 +197,10 @@ const navigateTo = (path: string) => {
 };
 
 // Computed properties
-const { accountOrdersDetails } = storeToRefs(orderStore);
-
-const activeOrderDetails = computed(() => {
-  return accountOrdersDetails.value.ActiveOrderDetails;
-});
+/* const { accountOrdersDetails } = storeToRefs(orderStore);
+const activeOrderDetails = computed(
+  () => accountOrdersDetails.value?.ActiveOrderDetails || []
+); */
 </script>
 
 <style scoped>
