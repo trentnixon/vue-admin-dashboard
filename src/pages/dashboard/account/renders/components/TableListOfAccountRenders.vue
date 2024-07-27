@@ -64,7 +64,8 @@
             </td>
 
             <td align="center">
-              <SecondaryButton :href="`/dashboard/schedulers/renders/${item.id}/`"
+              <SecondaryButton
+                :href="`/dashboard/scheduler/${accountId}/render/${item.id}/`"
                 >View</SecondaryButton
               >
             </td>
@@ -80,6 +81,11 @@ import { storeToRefs } from "pinia";
 import { useRendersStore } from "@/store/renders";
 import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
 import SecondaryButton from "@/components/common/buttons/SecondaryButton.vue";
+import { useRoute, useRouter } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+const accountId = Number(route.params.id);
 
 // Store setup
 const rendersStore = useRendersStore();
