@@ -27,7 +27,7 @@ const rendersStore = useRendersStore();
 const { getRendersBySchedulerId } = storeToRefs(rendersStore);
 
 const scatterChartData = ref([]);
-const scatterChartCategories = ref([...Array(25).keys()].map(i => i * 60)); // 0 to 1440 representing minutes since midnight
+const scatterChartCategories = ref([...Array(25).keys()].map((i) => i * 60)); // 0 to 1440 representing minutes since midnight
 
 const timeStringToMinutes = (timeString) => {
   const [hours, minutes] = timeString.split(":").map(Number);
@@ -53,20 +53,19 @@ watch(
     if (newRenders) {
       scatterChartData.value = newRenders.map((render) => {
         const startTime = parseISO(render.attributes.publishedAt);
-        const duration = (parseISO(render.attributes.updatedAt) - startTime) / 60000; // Convert to minutes
+        const duration =
+          (parseISO(render.attributes.updatedAt) - startTime) / 60000; // Convert to minutes
         const lifecycleCategory = determineLifecycleCategory(render);
-        const startTimeMinutes = timeStringToMinutes(format(startTime, "HH:mm"));
-        console.log("Render:", render.attributes.Name);
-        console.log("Start Time (minutes):", startTimeMinutes);
-        console.log("Duration:", duration);
-        console.log("Lifecycle Category:", lifecycleCategory);
+        const startTimeMinutes = timeStringToMinutes(
+          format(startTime, "HH:mm")
+        );
+
         return {
           name: render.attributes.Name,
           value: [startTimeMinutes, duration],
           category: lifecycleCategory,
         };
       });
-      console.log("Processed scatterChartData:", scatterChartData.value); // Debugging log
     } else {
       scatterChartData.value = [];
     }

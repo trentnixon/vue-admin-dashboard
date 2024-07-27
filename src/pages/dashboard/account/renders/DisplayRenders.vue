@@ -5,6 +5,22 @@
     </template>
   </ViewTitleBanner>
   <SchedulerInformation />
+  <SectionContainerWithTitle>
+    <template #title> Overview </template>
+    <template #content>
+      <v-row>
+        <v-col cols="4">
+          <CardSmallHasTeamRosters />
+        </v-col>
+        <v-col cols="4">
+          <CardSmallForceRerender />
+        </v-col>
+        <v-col cols="4">
+          <CardSmallAverageRenderTime />
+        </v-col>
+      </v-row>
+    </template>
+  </SectionContainerWithTitle>
   <TableListOfAccountRenders />
 
   <SectionContainerWithTitle>
@@ -13,7 +29,6 @@
       <v-row>
         <v-col cols="8">
           <ChartRendersTimeOfDay />
-          <!-- <ActiveOrdersPieChart /> -->
         </v-col>
         <v-col cols="4">
           <ChartTimeComparison />
@@ -36,6 +51,9 @@ import TableListOfAccountRenders from "@/pages/dashboard/account/renders/compone
 import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
 import ChartRendersTimeOfDay from "@/pages/dashboard/account/renders/components/ChartRendersTimeOfDay.vue";
 import ChartTimeComparison from "@/pages/dashboard/account/renders/components/ChartTimeComparison.vue";
+import CardSmallHasTeamRosters from "@/pages/dashboard/account/renders/components/CardSmallHasTeamRosters.vue";
+import CardSmallForceRerender from "@/pages/dashboard/account/renders/components/CardSmallForceRerender.vue";
+import CardSmallAverageRenderTime from "@/pages/dashboard/account/renders/components/CardSmallAverageRenderTime.vue";
 
 // Vars
 const title = ref("Renders");
