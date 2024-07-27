@@ -3,7 +3,7 @@
       :icon="'mdi-moon-waning-crescent'"
       :value="overnightRenders"
       subtitle="Over Night Renders"
-      buttonText="View Renders"
+      buttonText="Renders"
       @click="goToRenders"
       :theme="overnightRenders === 0 ? 'cardNeutral' : 'cardsuccess'"
     />

@@ -3,7 +3,7 @@
       :icon="'mdi-clock-outline'"
       :value="rendersStillProcessing"
       subtitle="Still Processing"
-      buttonText="View Renders"
+      buttonText="Renders"
       @click="goToRenders"
        :theme="rendersStillProcessing === 0 ? 'cardNeutral' : 'cardwarning'"
     />

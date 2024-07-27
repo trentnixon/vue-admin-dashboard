@@ -3,7 +3,7 @@
       :icon="'mdi-alert-circle-outline'"
       :value="errorsCount"
       subtitle="Errors Occurred"
-      buttonText="View Errors"
+      buttonText="Errors"
       @click="goToErrors"
       :theme="errorsCount === 0 ? 'cardNeutral' : 'carderror'"
     />

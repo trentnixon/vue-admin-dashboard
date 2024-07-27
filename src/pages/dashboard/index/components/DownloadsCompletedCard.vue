@@ -3,7 +3,7 @@
       :icon="'mdi-download'"
       :value="downloadsCompleted"
       subtitle="Downloads Completed"
-      buttonText="View Downloads"
+      buttonText="Downloads"
       @click="goToDownloads"
       :theme="downloadsCompleted === 0 ? 'cardNeutral' : 'cardsuccess'"
     />

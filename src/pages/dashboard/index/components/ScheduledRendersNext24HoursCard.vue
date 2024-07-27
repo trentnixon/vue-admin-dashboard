@@ -3,7 +3,7 @@
     :icon="'mdi-calendar-clock'"
     :value="schedulersDueTomorrow"
     subtitle="Scheduled Renders"
-    buttonText="View Schedulers"
+    buttonText="Schedulers"
     @click="goToSchedulers"
     :theme="schedulersDueTomorrow === 0 ? 'cardNeutral' : 'cardsuccess'"
   />
