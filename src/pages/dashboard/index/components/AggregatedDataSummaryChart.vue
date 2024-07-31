@@ -36,16 +36,17 @@ const formattedCategories = ref([]);
 watch(
   aggregatedDataSummary,
   (newSummary) => {
-    console.log("aggregatedDataSummary updated: ", newSummary);
     if (newSummary) {
       const { averageTime, piechartArray } = newSummary;
       displayAverageTime.value = averageTime / 60000; // Convert ms to minutes
-      lineChartData.value = piechartArray.map(item => ({
+      lineChartData.value = piechartArray.map((item) => ({
         value: item.value,
         name: `${item.account} (${item.name})`,
       }));
-      categories.value = piechartArray.map(item => item.name);
-      formattedCategories.value = categories.value.map(date => formatDate(date, "DD/MM/YYYY"));
+      categories.value = piechartArray.map((item) => item.name);
+      formattedCategories.value = categories.value.map((date) =>
+        formatDate(date, "DD/MM/YYYY")
+      );
     }
   },
   { immediate: true, deep: true }

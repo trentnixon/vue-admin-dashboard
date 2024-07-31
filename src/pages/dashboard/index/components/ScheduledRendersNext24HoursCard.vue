@@ -20,7 +20,7 @@ const schedulerStore = useSchedulerStore();
 const { schedulersDueTomorrow } = storeToRefs(schedulerStore);
 
 watch(schedulersDueTomorrow, () => {
-  console.log("schedulersDueTomorrow ", schedulersDueTomorrow);
+  //console.log("schedulersDueTomorrow ", schedulersDueTomorrow);
 });
 
 onMounted(async () => {

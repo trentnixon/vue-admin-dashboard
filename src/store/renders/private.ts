@@ -8,6 +8,8 @@ export interface PrivateRendersState {
   error: string | null;
   schedulerId: number;
   specificRenders: Render[];
+  previous24HoursRenders: Render[];
+  previous24HoursStats: any;
 }
 
 export const usePrivateRendersState = defineStore("renders-private", {
@@ -18,5 +20,7 @@ export const usePrivateRendersState = defineStore("renders-private", {
     error: null,
     schedulerId: 0,
     specificRenders: [],
+    previous24HoursRenders: [],
+    previous24HoursStats: null,
   }),
 });

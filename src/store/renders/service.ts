@@ -28,7 +28,17 @@ export async function fetchAllRendersFromService(): Promise<
   ApiResponse<Render[]>
 > {
   const response = await fetcher.get<ApiResponse<Render[]>>(
-    `/renders?populate=*`
+    `/renders?populate=scheduler`
   );
+  return response;
+}
+
+// New service to fetch renders from the previous 24 hours
+export async function fetchRendersFromPrevious24Hours(): Promise<
+  ApiResponse<{ Table: Render[]; Stats: any }>
+> {
+  const response = await fetcher.get<
+    ApiResponse<{ Table: Render[]; Stats: any }>
+  >(`/render/previous24hours`);
   return response;
 }

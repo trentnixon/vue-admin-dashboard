@@ -3,8 +3,8 @@
     :icon="'mdi-refresh'"
     :value="forceRerenderCount"
     subtitle="Force Rerender Requested"
-    buttonText="Details"
-    @click="goToDetails"
+    buttonText=""
+    @click="() => {}"
     theme="cardNeutral"
   />
 </template>
@@ -24,9 +24,4 @@ const forceRerenderCount = computed(() => {
     (render) => render.attributes.forceRerender
   ).length;
 });
-
-const router = useRouter();
-const goToDetails = () => {
-  router.push("/dashboard/renders/forceRerender");
-};
 </script>

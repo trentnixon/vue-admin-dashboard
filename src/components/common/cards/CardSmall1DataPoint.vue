@@ -15,7 +15,7 @@
       }}</span>
     </template>
 
-    <v-card-actions class="justify-end">
+    <v-card-actions class="justify-end" v-if="buttonText.length > 0">
       <SecondaryButton @click="handleClick">{{ buttonText }}</SecondaryButton>
     </v-card-actions>
   </v-card>

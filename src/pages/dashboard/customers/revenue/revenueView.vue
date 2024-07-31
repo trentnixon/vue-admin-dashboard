@@ -1,0 +1,94 @@
+<template>
+  <SectionContainerWithTitle>
+    <template #title> Customer Revenue </template>
+    <template #content>
+      <v-row>
+        <v-col cols="6">
+          Revenue by Customer Segment (Placeholder for Revenue by Segment
+          Component)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> and
+            <strong>useCustomerStore</strong> to display the revenue generated
+            by different customer segments.
+          </div>
+        </v-col>
+        <v-col cols="6">
+          Average Revenue Per Customer (Placeholder for Average Revenue Per
+          Customer Component)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> and
+            <strong>useCustomerStore</strong> to calculate and display the
+            average revenue per customer.
+          </div>
+        </v-col>
+        <v-col cols="12">
+          Lifetime Value of Customers (Placeholder for Lifetime Value Component)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> and
+            <strong>useCustomerStore</strong> to calculate and display the
+            lifetime value of customers.
+          </div>
+        </v-col>
+        <v-col cols="12">
+          Monthly Recurring Revenue (Placeholder for Monthly Recurring Revenue
+          Component)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> and
+            <strong>useCustomerStore</strong> to calculate and display the
+            monthly recurring revenue.
+          </div>
+        </v-col>
+        <v-col cols="6">
+          Average Order Value (Placeholder for Average Order Value Component)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> to calculate and display the average
+            value of orders.
+          </div>
+        </v-col>
+        <v-col cols="6">
+          Revenue Trends Over Time (Placeholder for Revenue Trends Over Time
+          Component)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> to display revenue trends over time.
+          </div>
+        </v-col>
+        <v-col cols="6">
+          Total Orders by Payment Status (Placeholder for Payment Status Pie
+          Chart)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> to categorize orders based on their
+            payment status (e.g., paid, unpaid, pending).
+          </div>
+        </v-col>
+        <v-col cols="6">
+          Revenue Breakdown by Subscription Tier (Placeholder for Revenue
+          Breakdown Chart)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> to break down revenue by
+            subscription tier.
+          </div>
+        </v-col>
+        <v-col cols="12">
+          Total Revenue by Currency (Placeholder for Currency Revenue Bar Chart)
+          <div>
+            This component will use the
+            <strong>useOrdersStore</strong> to display total revenue grouped by
+            different currencies.
+          </div>
+        </v-col>
+      </v-row>
+    </template>
+  </SectionContainerWithTitle>
+</template>
+
+<script setup lang="ts">
+import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
+</script>

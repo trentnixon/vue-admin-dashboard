@@ -25,7 +25,7 @@ export const getFormattedAccounts = (accounts: any[]) => {
     return account?.attributes?.account_type?.data?.attributes?.Name || "Unknown";
   };
 
-  const getLogo = (account: any) => {
+  export const getLogo = (account: any) => {
     const organizationType = determineOrganizationType(account);
     if (organizationType === "Association") {
       return (

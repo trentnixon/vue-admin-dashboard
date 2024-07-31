@@ -3,6 +3,7 @@ import rootView from './overview/rootView.vue';
 import AccountData from './data/AccountData.vue';
 import MediaLibraries from './mediaLibraries/MediaLibraries.vue';
 import DisplayRenders from './renders/DisplayRenders.vue';
+import SeasonView from './season/seasonView.vue';
 
 const accountRoutes: Array<RouteRecordRaw> = [
   {
@@ -16,6 +17,10 @@ const accountRoutes: Array<RouteRecordRaw> = [
       {
         path: 'data',
         component: AccountData,
+      },
+      {
+        path: 'season',
+        component: SeasonView,
       },
       {
         path: 'medialibrary',

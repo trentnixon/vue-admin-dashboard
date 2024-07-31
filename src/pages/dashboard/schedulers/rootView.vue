@@ -4,7 +4,7 @@
       {{ title }}
     </template>
   </ViewTitleBanner>
-
+  <SchedulerMetrics />
   <v-card>
     <v-tabs v-model="tab" bg-color="primary">
       <v-tab value="scheduler-overview">Scheduler Overview</v-tab>
@@ -202,45 +202,33 @@
   </v-card>
 </template>
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
 import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
+
+import { useAccountStore } from "@/store/account";
+import { useOrdersStore } from "@/store/orders";
+import { useSchedulerStore } from "@/store/scheduler";
+import { useRendersStore } from "@/store/renders";
+const accountStore = useAccountStore();
+const ordersStore = useOrdersStore();
+const schedulerStore = useSchedulerStore();
+const rendersStore = useRendersStore();
 
 const title = ref("Scheduler and Render Management");
 const tab = ref("scheduler-overview");
 
 // Placeholder Data
-const totalSchedulers = ref("Placeholder for Total Schedulers Data");
-const activeSchedulers = ref("Placeholder for Active Schedulers Data");
-const queuedSchedulers = ref("Placeholder for Queued Schedulers Data");
-const schedulers = ref("Placeholder for Schedulers Data");
-const schedulerActivities = ref("Placeholder for Scheduler Activities Data");
-const schedulersByDay = ref("Placeholder for Schedulers by Day Data");
-const schedulerSuccessRate = ref("Placeholder for Scheduler Success Rate Data");
+import SchedulerMetrics from "@/pages/dashboard/index/SchedulerMetrics.vue";
 
-const totalRenders = ref("Placeholder for Total Renders Data");
-const completedRenders = ref("Placeholder for Completed Renders Data");
-const processingRenders = ref("Placeholder for Processing Renders Data");
-const renders = ref("Placeholder for Renders Data");
-const renderActivities = ref("Placeholder for Render Activities Data");
-const rendersByType = ref("Placeholder for Renders by Type Data");
-const renderErrorRate = ref("Placeholder for Render Error Rate Data");
-
-const forceRerenderRenders = () => {
-  console.log("Placeholder action for forcing rerender of selected renders");
-};
-
-const sendRenderCompletionEmails = () => {
-  console.log("Placeholder action for sending render completion emails");
-};
-
-const scheduleNewRender = () => {
-  console.log("Placeholder action for scheduling a new render");
-};
-
-const rescheduleExistingRender = () => {
-  console.log("Placeholder action for rescheduling an existing render");
-};
+onMounted(() => {
+  accountStore.fetchAccounts().then(() => {
+    accountStore.fetchAccounts();
+  });
+  ordersStore.fetchOrders();
+  schedulerStore.fetchAllSchedulers();
+  rendersStore.fetchAllRenders();
+});
 </script>
 <style scoped>
 .elevation-1 {

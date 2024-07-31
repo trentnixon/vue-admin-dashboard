@@ -187,6 +187,11 @@ const navItems = ref([
   },
   {
     icon: "mdi-cog",
+    title: "Season",
+    to: `/dashboard/account/${accountId}/season`,
+  },
+  {
+    icon: "mdi-cog",
     title: "medialibrary",
     to: `/dashboard/account/${accountId}/medialibrary`,
   },

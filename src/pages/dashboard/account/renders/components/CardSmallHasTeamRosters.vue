@@ -3,8 +3,8 @@
     :icon="'mdi-account-group'"
     :value="hasTeamRostersCount"
     subtitle="Team Rosters Requested"
-    buttonText="Details"
-    @click="goToDetails"
+    buttonText=""
+    @click="() => {}"
     theme="cardNeutral"
   />
 </template>

@@ -39,7 +39,7 @@ const topNavigationItems = ref([
     title: "Accounts",
   },
   {
-    to: "/dashboard/customers",
+    to: "/dashboard/customers/home",
     icon: "mdi-currency-usd",
     title: "Customers",
   },

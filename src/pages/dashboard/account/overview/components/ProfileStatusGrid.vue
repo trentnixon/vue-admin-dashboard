@@ -12,8 +12,9 @@
             @click="goToOrders"
           />
         </v-col>
-        <v-col cols="3">Renders</v-col>
-        <v-col cols="3">Fixtures</v-col>
+        <v-col cols="3">total number of Bundles</v-col>
+        <v-col cols="3">total number of Downloads</v-col>
+        <v-col cols="3">total number of Articles</v-col>
       </v-row>
     </template>
   </SectionContainerWithTitle>
