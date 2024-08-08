@@ -3,6 +3,7 @@ import { Render } from "@/types";
 
 export interface PrivateRendersState {
   render: Render | null;
+  selectedRender: Render | null;
   renders: Render[];
   loading: boolean;
   error: string | null;
@@ -16,6 +17,7 @@ export const usePrivateRendersState = defineStore("renders-private", {
   state: (): PrivateRendersState => ({
     render: null,
     renders: [],
+    selectedRender: null,
     loading: false,
     error: null,
     schedulerId: 0,

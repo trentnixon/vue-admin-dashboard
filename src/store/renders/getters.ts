@@ -4,6 +4,7 @@ import { format, isWithinInterval, subDays, subMonths } from "date-fns";
 
 export const render = computed(() => usePrivateRendersState().render);
 export const renders = computed(() => usePrivateRendersState().renders);
+export const selectedRender = computed(() => usePrivateRendersState().selectedRender);
 export const loading = computed(() => usePrivateRendersState().loading);
 export const error = computed(() => usePrivateRendersState().error);
 

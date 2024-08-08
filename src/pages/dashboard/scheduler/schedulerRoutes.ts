@@ -1,17 +1,16 @@
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw } from "vue-router";
 
 const schedulerRoutes: Array<RouteRecordRaw> = [
   {
-    path: 'scheduler/:id',
-    component: () => import('./rootView.vue'),
+    path: "scheduler/:schedulerId",
+    component: () => import("./rootView.vue"),
     children: [
       {
-        path: 'render/:id',
-        component: () => import('./render/renderView.vue'),
-      }
+        path: "render/:renderId",
+        component: () => import("./render/renderView.vue"),
+      },
     ],
   },
 ];
 
 export default schedulerRoutes;
-
