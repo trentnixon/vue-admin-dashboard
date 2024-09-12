@@ -1,5 +1,5 @@
-import { usePrivateTeamState } from "./private";
-import { fetchTeamFromService, fetchTeamsByClubIdFromService } from "./service";
+import { usePrivateTeamState } from './private';
+import { fetchTeamFromService, fetchTeamsByClubIdFromService } from './service';
 
 export async function fetchTeam(id: number) {
   const state = usePrivateTeamState();
@@ -8,9 +8,9 @@ export async function fetchTeam(id: number) {
     const response = await fetchTeamFromService(id);
     if (response && response.data) {
       state.team = response.data;
-      console.log("Fetched team details:", state.team);
+      console.log('Fetched team details:', state.team);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -26,9 +26,9 @@ export async function fetchTeamsByClubId(clubId: number) {
     const response = await fetchTeamsByClubIdFromService(clubId);
     if (response && response.data) {
       state.teams = response.data;
-      console.log("Fetched teams for club ID:", clubId, state.teams);
+      console.log('Fetched teams for club ID:', clubId, state.teams);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

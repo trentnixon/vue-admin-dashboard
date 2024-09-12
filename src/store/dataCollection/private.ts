@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { DataCollection } from "@/types";
+import { defineStore } from 'pinia';
+import { DataCollection } from '@/types';
 
 export interface PrivateDataCollectionState {
   dataCollections: DataCollection[];
@@ -10,13 +10,16 @@ export interface PrivateDataCollectionState {
   error: string | null;
 }
 
-export const usePrivateDataCollectionState = defineStore("dataCollection-private", {
-  state: (): PrivateDataCollectionState => ({
-    dataCollections: [],
-    accountDataCollections: [],
-    dataCollectionDetails: null,
-    parentDataCollections: [],
-    loading: false,
-    error: null,
-  }),
-});
+export const usePrivateDataCollectionState = defineStore(
+  'dataCollection-private',
+  {
+    state: (): PrivateDataCollectionState => ({
+      dataCollections: [],
+      accountDataCollections: [],
+      dataCollectionDetails: null,
+      parentDataCollections: [],
+      loading: false,
+      error: null
+    })
+  }
+);

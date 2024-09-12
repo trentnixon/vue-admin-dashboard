@@ -1,6 +1,10 @@
-import { usePrivateCustomerState } from "./private";
-import { fetchCustomersFromService, fetchCustomerDetailsFromService, fetchAccountCustomersFromService } from "./service";
-import { Customer } from "@/types";
+import { usePrivateCustomerState } from './private';
+import {
+  fetchCustomersFromService,
+  fetchCustomerDetailsFromService,
+  fetchAccountCustomersFromService
+} from './service';
+import { Customer } from '@/types';
 
 export async function fetchCustomers() {
   const state = usePrivateCustomerState();
@@ -9,9 +13,9 @@ export async function fetchCustomers() {
     const response = await fetchCustomersFromService();
     if (response && response.data) {
       state.customers = response.data as Customer[];
-      console.log("Fetched customers data:", state.customers);
+      console.log('Fetched customers data:', state.customers);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -27,9 +31,9 @@ export async function fetchCustomerDetails(id: number) {
     const response = await fetchCustomerDetailsFromService(id);
     if (response && response.data) {
       state.customerDetails = response.data as Customer;
-      console.log("Fetched customer details:", state.customerDetails);
+      console.log('Fetched customer details:', state.customerDetails);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -45,9 +49,9 @@ export async function fetchAccountCustomers(accountId: number) {
     const response = await fetchAccountCustomersFromService(accountId);
     if (response && response.data) {
       state.accountCustomers = response.data as Customer[];
-      console.log("Fetched account customers data:", state.accountCustomers);
+      console.log('Fetched account customers data:', state.accountCustomers);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

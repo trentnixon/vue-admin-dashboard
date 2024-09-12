@@ -1,13 +1,13 @@
 <template>
-    <ContainerBlueGreyLighten2>
-      <v-chart class="chart" :option="option" :theme="theme" autoresize />
-    </ContainerBlueGreyLighten2>
-  </template>
+  <ContainerBlueGreyLighten2>
+    <v-chart class="chart" :option="option" :theme="theme" autoresize />
+  </ContainerBlueGreyLighten2>
+</template>
 
-  <script setup>
-  import ContainerBlueGreyLighten2 from "@/components/common/containers/ContainerBlueGreyLighten2.vue";
-  import { defineProps, watch, ref } from "vue";
-  import VChart from "vue-echarts";
+<script setup>
+  import ContainerBlueGreyLighten2 from '@/components/common/containers/ContainerBlueGreyLighten2.vue';
+  import { defineProps, watch, ref } from 'vue';
+  import VChart from 'vue-echarts';
 
   const props = defineProps({
     data: Array,
@@ -16,72 +16,72 @@
     subtitle: String,
     theme: {
       type: String,
-      default: "customTheme",
+      default: 'customTheme'
     },
     seriesName: {
       type: String,
-      default: "Bar Data",
-    },
+      default: 'Bar Data'
+    }
   });
 
   const option = ref({
     title: {
-    text: props.title,
-    subtext: props.subtitle,
-    itemGap: 3,
-    left: "right",
-    top: 0,
-    textStyle: {
-      fontSize: 15,
-      fontFamily: "Roboto",
+      text: props.title,
+      subtext: props.subtitle,
+      itemGap: 3,
+      left: 'right',
+      top: 0,
+      textStyle: {
+        fontSize: 15,
+        fontFamily: 'Roboto'
+      },
+      subtextStyle: {
+        fontSize: 12,
+        fontFamily: 'Roboto'
+      }
     },
-    subtextStyle: {
-      fontSize: 12,
-      fontFamily: "Roboto",
-    },
-  },
     tooltip: {
-      trigger: "axis",
+      trigger: 'axis'
     },
     legend: {
-      orient: "horizontal",
-      left: "right",
-      bottom: "10",
+      orient: 'horizontal',
+      left: 'right',
+      bottom: '10'
     },
     xAxis: {
-      type: "category",
-      data: props.categories,
+      type: 'category',
+      data: props.categories
     },
     yAxis: {
-      type: "value",
+      type: 'value'
     },
     series: [
       {
         name: props.seriesName,
-        type: "bar",
+        type: 'bar',
         data: props.data,
         smooth: true,
         showBackground: true,
-        areaStyle: {},
-      },
+        areaStyle: {}
+      }
     ],
     emphasis: {
       itemStyle: {
         shadowBlur: 10,
         shadowOffsetX: 0,
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-      },
-    },
+        shadowColor: 'rgba(0, 0, 0, 0.5)'
+      }
+    }
   });
 
   watch([() => props.data, () => props.categories], () => {
     option.value.xAxis.data = props.categories;
     option.value.series[0].data = props.data;
   });
-  </script>
+</script>
 
-  <style scoped>
+<style scoped>
   .chart {
     height: 300px;
   }
-  </style>
+</style>

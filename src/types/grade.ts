@@ -1,7 +1,7 @@
-import { Competition } from "./competition";
-import { GameMetaData } from "./gameMetaData";
-import { Team } from "./team";
-import { Download } from "./download";
+import { Competition } from './competition';
+import { GameMetaData } from './gameMetaData';
+import { Team } from './team';
+import { Download } from './download';
 
 export interface GradeAttributes {
   gradeName: string;

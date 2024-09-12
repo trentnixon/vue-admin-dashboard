@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-0 pa-3 bg-white" variant="flat" >
+  <v-card class="mx-auto my-0 pa-3 bg-white" variant="flat">
     <v-card-title class="font-weight-bold primary--text">
       <slot name="title">Default Title</slot>
     </v-card-title>
@@ -10,15 +10,15 @@
       <slot name="text">Default Content</slot>
     </v-card-text>
     <v-card-actions>
-      <slot name="actions"> </slot>
+      <slot name="actions"></slot>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup lang="ts">
-// Pinia
+  // Pinia
 
-// Emit an event when an action is clicked
+  // Emit an event when an action is clicked
 </script>
 
 <style scoped></style>

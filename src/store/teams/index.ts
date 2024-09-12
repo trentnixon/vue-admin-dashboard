@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import * as getters from "./getters";
-import * as actions from "./actions";
+import { defineStore } from 'pinia';
+import * as getters from './getters';
+import * as actions from './actions';
 
-export const useTeamsStore = defineStore("teams", () => {
+export const useTeamsStore = defineStore('teams', () => {
   return { ...actions, ...getters };
 });

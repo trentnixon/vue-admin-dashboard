@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { Render } from "@/types";
+import { defineStore } from 'pinia';
+import { Render } from '@/types';
 
 export interface PrivateRendersState {
   render: Render | null;
@@ -13,7 +13,7 @@ export interface PrivateRendersState {
   previous24HoursStats: any;
 }
 
-export const usePrivateRendersState = defineStore("renders-private", {
+export const usePrivateRendersState = defineStore('renders-private', {
   state: (): PrivateRendersState => ({
     render: null,
     renders: [],
@@ -23,6 +23,6 @@ export const usePrivateRendersState = defineStore("renders-private", {
     schedulerId: 0,
     specificRenders: [],
     previous24HoursRenders: [],
-    previous24HoursStats: null,
-  }),
+    previous24HoursStats: null
+  })
 });

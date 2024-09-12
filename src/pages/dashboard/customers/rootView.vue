@@ -25,39 +25,39 @@
 </template>
 
 <script setup lang="ts">
-import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import { ref } from "vue";
+  import ViewTitleBanner from '@/components/common/builds/ViewTitleBanner.vue';
+  import { ref } from 'vue';
 
-// Cards
-import { useRouter } from "vue-router";
+  // Cards
+  import { useRouter } from 'vue-router';
 
-//
-const router = useRouter();
-const title = ref("Fixtura Customer Journey");
+  //
+  const router = useRouter();
+  const title = ref('Fixtura Customer Journey');
 
-const navigateTo = (path: string) => {
-  router.push(path);
-};
-const navItems = ref([
-  {
-    icon: "mdi-account",
-    title: "Home",
-    to: `/dashboard/customers/home`,
-  },
-  {
-    icon: "mdi-account",
-    title: "Activity",
-    to: `/dashboard/customers/activity`,
-  },
-  {
-    icon: "mdi-account",
-    title: "Revenue",
-    to: `/dashboard/customers/revenue`,
-  },
-]);
+  const navigateTo = (path: string) => {
+    router.push(path);
+  };
+  const navItems = ref([
+    {
+      icon: 'mdi-account',
+      title: 'Home',
+      to: `/dashboard/customers/home`
+    },
+    {
+      icon: 'mdi-account',
+      title: 'Activity',
+      to: `/dashboard/customers/activity`
+    },
+    {
+      icon: 'mdi-account',
+      title: 'Revenue',
+      to: `/dashboard/customers/revenue`
+    }
+  ]);
 </script>
 <style scoped>
-.elevation-1 {
-  margin-bottom: 20px;
-}
+  .elevation-1 {
+    margin-bottom: 20px;
+  }
 </style>

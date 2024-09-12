@@ -14,8 +14,15 @@ export interface AccountMediaLibraryAttributes {
   title: string;
   isActive: boolean;
   tags: any;
-  AgeGroup: "Seniors" | "Juniors" | "Both";
-  AssetType: "ALL" | "Upcoming Fixtures" | "Weekend Results" | "Top 5 Run Scorers" | "Top 5 Bowlers" | "League Tables" | "Team List";
+  AgeGroup: 'Seniors' | 'Juniors' | 'Both';
+  AssetType:
+    | 'ALL'
+    | 'Upcoming Fixtures'
+    | 'Weekend Results'
+    | 'Top 5 Run Scorers'
+    | 'Top 5 Bowlers'
+    | 'League Tables'
+    | 'Team List';
 }
 
 export interface AccountMediaLibrary {

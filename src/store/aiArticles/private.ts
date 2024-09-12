@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { AiArticle } from "@/types";
+import { defineStore } from 'pinia';
+import { AiArticle } from '@/types';
 
 interface PrivateAiArticleState {
   aiArticle: AiArticle | null;
@@ -7,14 +7,16 @@ interface PrivateAiArticleState {
   loading: boolean;
   totalAiArticleCount: number;
   error: string | null;
+  aiArticlesByRenderID: AiArticle[];
 }
 
-export const usePrivateAiArticleState = defineStore("aiArticles-private", {
+export const usePrivateAiArticleState = defineStore('aiArticles-private', {
   state: (): PrivateAiArticleState => ({
     aiArticle: null,
     aiArticles: [],
     totalAiArticleCount: 0,
     loading: false,
     error: null,
-  }),
+    aiArticlesByRenderID: []
+  })
 });

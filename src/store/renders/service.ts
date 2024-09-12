@@ -1,5 +1,5 @@
-import fetcher from "@/actions/fetcher";
-import { Render } from "@/types";
+import fetcher from '@/actions/fetcher';
+import { Render } from '@/types';
 
 interface ApiResponse<T> {
   data: T;

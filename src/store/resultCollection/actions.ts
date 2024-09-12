@@ -1,9 +1,9 @@
-import { usePrivateResultCollectionState } from "./private";
+import { usePrivateResultCollectionState } from './private';
 import {
   fetchResultCollectionsFromService,
   fetchResultCollectionDetailsFromService,
-  fetchAccountResultCollectionsFromService,
-} from "./service";
+  fetchAccountResultCollectionsFromService
+} from './service';
 
 export async function fetchResultCollections() {
   const state = usePrivateResultCollectionState();
@@ -12,9 +12,9 @@ export async function fetchResultCollections() {
     const response = await fetchResultCollectionsFromService();
     if (response && response.data) {
       state.resultCollections = response.data;
-      console.log("Fetched result collections data:", state.resultCollections);
+      console.log('Fetched result collections data:', state.resultCollections);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -31,11 +31,11 @@ export async function fetchResultCollectionDetails(id: number) {
     if (response && response.data) {
       state.resultCollectionDetails = response.data;
       console.log(
-        "Fetched result collection details:",
+        'Fetched result collection details:',
         state.resultCollectionDetails
       );
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -52,11 +52,11 @@ export async function fetchAccountResultCollections(accountId: number) {
     if (response && response.data) {
       state.accountResultCollections = response.data;
       console.log(
-        "Fetched account result collections data:",
+        'Fetched account result collections data:',
         state.accountResultCollections
       );
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

@@ -23,19 +23,19 @@
 </template>
 
 <script setup lang="ts">
-// structure
-import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
-// Components
-import DataCollectionTracking from "@/pages/dashboard/account/data/components/DataCollectionTracking.vue";
-import ResultCollectionTracking from "@/pages/dashboard/account/data/components/ResultCollectionTracking.vue";
-import MetaDataTracking from "@/pages/dashboard/account/data/components/MetaDataTracking.vue";
+  // structure
+  import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
+  // Components
+  import DataCollectionTracking from '@/pages/dashboard/account/data/components/DataCollectionTracking.vue';
+  import ResultCollectionTracking from '@/pages/dashboard/account/data/components/ResultCollectionTracking.vue';
+  import MetaDataTracking from '@/pages/dashboard/account/data/components/MetaDataTracking.vue';
 
-// Pinia
-import { useDataCollectionStore } from "@/store/dataCollection";
-import { storeToRefs } from "pinia";
+  // Pinia
+  import { useDataCollectionStore } from '@/store/dataCollection';
+  import { storeToRefs } from 'pinia';
 
-const dataCollectionStore = useDataCollectionStore();
-const { accountDataCollectionCount } = storeToRefs(dataCollectionStore);
+  const dataCollectionStore = useDataCollectionStore();
+  const { accountDataCollectionCount } = storeToRefs(dataCollectionStore);
 </script>
 
 <style lang="scss" scoped></style>

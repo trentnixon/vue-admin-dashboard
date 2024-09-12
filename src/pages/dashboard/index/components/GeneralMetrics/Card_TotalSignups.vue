@@ -9,18 +9,18 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
-import { useAccountStore } from "@/store/account";
-import CardSmall1DataPoint from "@/components/common/cards/CardSmall1DataPoint.vue";
+  import { storeToRefs } from 'pinia';
+  import { useRouter } from 'vue-router';
+  import { useAccountStore } from '@/store/account';
+  import CardSmall1DataPoint from '@/components/common/cards/CardSmall1DataPoint.vue';
 
-const accountStore = useAccountStore();
-const { accountCount } = storeToRefs(accountStore);
+  const accountStore = useAccountStore();
+  const { accountCount } = storeToRefs(accountStore);
 
-const router = useRouter();
-const goToAccounts = () => {
-  router.push("/dashboard/accounts");
-};
+  const router = useRouter();
+  const goToAccounts = () => {
+    router.push('/dashboard/accounts');
+  };
 </script>
 
 <style scoped></style>

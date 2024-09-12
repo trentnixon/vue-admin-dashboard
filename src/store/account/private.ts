@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { Account, AccountAttributes } from "@/types/account";
+import { defineStore } from 'pinia';
+import { Account, AccountAttributes } from '@/types/account';
 
 export interface PrivateAccountState {
   accounts: Account[];
@@ -9,12 +9,12 @@ export interface PrivateAccountState {
   error: string | null;
 }
 
-export const usePrivateAccountState = defineStore("account-private", {
+export const usePrivateAccountState = defineStore('account-private', {
   state: (): PrivateAccountState => ({
     accounts: [],
     accountDetails: null,
     selectedAccount: null,
     loading: false,
-    error: null,
-  }),
+    error: null
+  })
 });

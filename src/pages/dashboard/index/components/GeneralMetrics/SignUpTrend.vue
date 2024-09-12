@@ -16,19 +16,19 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useAccountStore } from "@/store/account";
-import BarChart from "@/components/common/charts/BarChart.vue";
-import { storeToRefs } from "pinia";
+  import { computed } from 'vue';
+  import { useAccountStore } from '@/store/account';
+  import BarChart from '@/components/common/charts/BarChart.vue';
+  import { storeToRefs } from 'pinia';
 
-const accountStore = useAccountStore();
-const { accountSignUpTrend } = storeToRefs(accountStore);
+  const accountStore = useAccountStore();
+  const { accountSignUpTrend } = storeToRefs(accountStore);
 
-const signUpTrendData = computed(() => accountSignUpTrend.value);
+  const signUpTrendData = computed(() => accountSignUpTrend.value);
 </script>
 
 <style scoped>
-.chart {
-  height: 300px;
-}
+  .chart {
+    height: 300px;
+  }
 </style>

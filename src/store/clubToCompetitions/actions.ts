@@ -1,6 +1,9 @@
-import { usePrivateClubToCompetitionState } from "./private";
-import { fetchClubToCompetitionFromService, fetchClubToCompetitionsByClubIdFromService } from "./service";
-import { ClubToCompetition } from "@/types";
+import { usePrivateClubToCompetitionState } from './private';
+import {
+  fetchClubToCompetitionFromService,
+  fetchClubToCompetitionsByClubIdFromService
+} from './service';
+import { ClubToCompetition } from '@/types';
 
 export async function fetchClubToCompetition(id: number) {
   const state = usePrivateClubToCompetitionState();
@@ -9,9 +12,12 @@ export async function fetchClubToCompetition(id: number) {
     const response = await fetchClubToCompetitionFromService(id);
     if (response && response.data) {
       state.clubToCompetition = response.data as ClubToCompetition;
-      console.log("Fetched club to competition details:", state.clubToCompetition);
+      console.log(
+        'Fetched club to competition details:',
+        state.clubToCompetition
+      );
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -27,9 +33,13 @@ export async function fetchClubToCompetitionsByClubId(clubId: number) {
     const response = await fetchClubToCompetitionsByClubIdFromService(clubId);
     if (response && response.data) {
       state.clubToCompetitions = response.data as ClubToCompetition[];
-      console.log("Fetched club to competitions for club ID:", clubId, state.clubToCompetitions);
+      console.log(
+        'Fetched club to competitions for club ID:',
+        clubId,
+        state.clubToCompetitions
+      );
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

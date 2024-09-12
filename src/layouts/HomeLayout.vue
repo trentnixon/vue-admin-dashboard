@@ -8,20 +8,20 @@
 </template>
 
 <script>
-import MainContent from "@/components/structure/MainContent.vue";
-import Footer from "@/components/structure/Footer.vue";
+  import MainContent from '@/components/structure/MainContent.vue';
+  import Footer from '@/components/structure/Footer.vue';
 
-export default {
-  name: "HomeLayout",
-  components: {
-    MainContent,
-    Footer,
-  },
-};
+  export default {
+    name: 'HomeLayout',
+    components: {
+      MainContent,
+      Footer
+    }
+  };
 </script>
 
 <style>
-.fill-height {
-  min-height: 100vh;
-}
+  .fill-height {
+    min-height: 100vh;
+  }
 </style>

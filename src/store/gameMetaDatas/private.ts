@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { GameMetaData } from "@/types";
+import { defineStore } from 'pinia';
+import { GameMetaData } from '@/types';
 
 export interface PrivateGameMetaDatasState {
   gameMetaData: GameMetaData | null;
@@ -8,11 +8,14 @@ export interface PrivateGameMetaDatasState {
   error: string | null;
 }
 
-export const usePrivateGameMetaDatasState = defineStore("gameMetaDatas-private", {
-  state: (): PrivateGameMetaDatasState => ({
-    gameMetaData: null,
-    gameMetaDatas: [],
-    loading: false,
-    error: null,
-  }),
-});
+export const usePrivateGameMetaDatasState = defineStore(
+  'gameMetaDatas-private',
+  {
+    state: (): PrivateGameMetaDatasState => ({
+      gameMetaData: null,
+      gameMetaDatas: [],
+      loading: false,
+      error: null
+    })
+  }
+);

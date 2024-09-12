@@ -7,18 +7,18 @@ const settingsRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'general',
-        component: () => import('./settings/GeneralSettings.vue'),
+        component: () => import('./settings/GeneralSettings.vue')
       },
       {
         path: 'system-logs',
-        component: () => import('./settings/SystemLogs.vue'),
+        component: () => import('./settings/SystemLogs.vue')
       },
       {
         path: 'user-management',
-        component: () => import('./settings/UserManagement.vue'),
-      },
-    ],
-  },
+        component: () => import('./settings/UserManagement.vue')
+      }
+    ]
+  }
 ];
 
 export default settingsRoutes;

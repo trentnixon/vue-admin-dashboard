@@ -1,9 +1,24 @@
 import dayjs from 'dayjs';
 
 interface ProcessingTracker {
-  competitions: { itemsFound: number; itemsUpdated: number; itemsNew: number; errorsDetected: number };
-  teams: { itemsFound: number; itemsUpdated: number; itemsNew: number; errorsDetected: number };
-  games: { itemsFound: number; itemsUpdated: number; itemsNew: number; errorsDetected: number };
+  competitions: {
+    itemsFound: number;
+    itemsUpdated: number;
+    itemsNew: number;
+    errorsDetected: number;
+  };
+  teams: {
+    itemsFound: number;
+    itemsUpdated: number;
+    itemsNew: number;
+    errorsDetected: number;
+  };
+  games: {
+    itemsFound: number;
+    itemsUpdated: number;
+    itemsNew: number;
+    errorsDetected: number;
+  };
   totalStages: number;
   currentStage: string;
   completedStages: string[];
@@ -29,32 +44,42 @@ export const generateDateRange = (days: number): string[] => {
   const startDate = endDate.subtract(days, 'day');
   const dateArray: string[] = [];
 
-  for (let date = startDate; date.isBefore(endDate) || date.isSame(endDate); date = date.add(1, 'day')) {
+  for (
+    let date = startDate;
+    date.isBefore(endDate) || date.isSame(endDate);
+    date = date.add(1, 'day')
+  ) {
     dateArray.push(date.format('DD/MM/YYYY')); // Format to UK date format
   }
 
   return dateArray;
 };
 
-export const filterCollectionsByDate = (collections: CollectionItem[], days: number): { dateArray: string[], dataPoints: number[] } => {
+export const filterCollectionsByDate = (
+  collections: CollectionItem[],
+  days: number
+): { dateArray: string[]; dataPoints: number[] } => {
   const dateArray = generateDateRange(days);
-  const collectionDates = collections.map((item) =>
+  const collectionDates = collections.map(item =>
     dayjs(item.attributes.whenWasTheLastCollection).format('DD/MM/YYYY')
   ); // Format collection dates to UK date format
 
-  const dataPoints = dateArray.map((date) => {
+  const dataPoints = dateArray.map(date => {
     return collectionDates.includes(date) ? 1 : 0;
   });
 
   return { dateArray, dataPoints };
 };
 
-export const filterCollectionsForChart = (collections: CollectionItem[], key: NumericAttributeKeys): { dateArray: string[], dataPoints: number[] } => {
-  const dateArray = collections.map((item) =>
+export const filterCollectionsForChart = (
+  collections: CollectionItem[],
+  key: NumericAttributeKeys
+): { dateArray: string[]; dataPoints: number[] } => {
+  const dateArray = collections.map(item =>
     dayjs(item.attributes.whenWasTheLastCollection).format('DD/MM/YYYY')
   ); // Format collection dates to UK date format
 
-  const dataPoints = collections.map((item) => item.attributes[key]);
+  const dataPoints = collections.map(item => item.attributes[key]);
 
   return { dateArray, dataPoints };
 };

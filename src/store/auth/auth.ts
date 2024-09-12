@@ -2,7 +2,9 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useAuthStore = defineStore('auth', () => {
-  const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true' || false);
+  const isAuthenticated = ref(
+    localStorage.getItem('isAuthenticated') === 'true' || false
+  );
 
   const login = (username: string, password: string): boolean => {
     const envUsername = process.env.VUE_APP_USERNAME;
@@ -30,6 +32,6 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     isAuthenticated,
     login,
-    logout,
+    logout
   };
 });

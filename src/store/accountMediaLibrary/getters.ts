@@ -19,7 +19,10 @@ export const accountMediaLibraryCount = computed(() => {
 });
 
 export const firstTenImages = computed(() => {
-  return usePrivateAccountMediaLibraryState().accountMediaLibraries.slice(0, 10);
+  return usePrivateAccountMediaLibraryState().accountMediaLibraries.slice(
+    0,
+    10
+  );
 });
 
 export const imageCount = computed(() => {

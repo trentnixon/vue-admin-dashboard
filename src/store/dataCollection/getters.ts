@@ -1,6 +1,6 @@
-import { computed } from "vue";
-import { usePrivateDataCollectionState } from "./private";
-import { format } from "date-fns";
+import { computed } from 'vue';
+import { usePrivateDataCollectionState } from './private';
+import { format } from 'date-fns';
 
 //
 export const dataCollections = computed(
@@ -42,13 +42,15 @@ export const accountDataCollectionSummary = computed(() => {
   );
   const averageTime = totalTime / totalCollections;
 
-  const piechartArray = collections.map((item) => ({
-    name: format(
-      new Date(item.attributes.whenWasTheLastCollection),
-      "dd/MM/yyyy HH:mm:ss"
-    ),
-    value: item.attributes.TimeTaken / 60000,
-  })).slice(0, 25);
+  const piechartArray = collections
+    .map(item => ({
+      name: format(
+        new Date(item.attributes.whenWasTheLastCollection),
+        'dd/MM/yyyy HH:mm:ss'
+      ),
+      value: item.attributes.TimeTaken / 60000
+    }))
+    .slice(0, 25);
 
   return { averageTime, piechartArray };
 });
@@ -69,10 +71,12 @@ export const accountMemoryTrackingSummary = computed(() => {
   );
   const averageMemory = totalMemory / totalCollections;
 
-  const piechartArray = collections.map((item) => ({
-    name: item.attributes.whenWasTheLastCollection,
-    value: item.attributes.MemoryUsage,
-  })).slice(0, 25);
+  const piechartArray = collections
+    .map(item => ({
+      name: item.attributes.whenWasTheLastCollection,
+      value: item.attributes.MemoryUsage
+    }))
+    .slice(0, 25);
 
   return { averageMemory, piechartArray };
 });
@@ -85,7 +89,7 @@ export const accountMemoryTrackingSummary = computed(() => {
  */
 export const accountDataCollectionProcessingSummary = computed(() => {
   const collections = accountDataCollections.value;
-  return collections.map((item) => {
+  return collections.map(item => {
     const date = item.attributes.whenWasTheLastCollection;
     const competitions = item.attributes.processingTracker.competitions;
     const teams = item.attributes.processingTracker.teams;
@@ -95,7 +99,7 @@ export const accountDataCollectionProcessingSummary = computed(() => {
       date,
       competitions,
       teams,
-      games,
+      games
     };
   });
 });
@@ -112,7 +116,7 @@ export const aggregatedDataSummary = computed(() => {
 
   // Filter collections to ensure they have the necessary attributes
   const validCollections = collections.filter(
-    (item) =>
+    item =>
       item.attributes.whenWasTheLastCollection &&
       item.attributes.TimeTaken &&
       item.attributes.account.data.attributes.FirstName
@@ -133,11 +137,11 @@ export const aggregatedDataSummary = computed(() => {
   const averageMemory = totalMemory / validCollections.length;
 
   //console.log("validCollections ", validCollections);
-  const piechartArray = validCollections.map((item) => {
+  const piechartArray = validCollections.map(item => {
     return {
       name: item.attributes.whenWasTheLastCollection,
       account: item.attributes.account.data.attributes.FirstName,
-      value: item.attributes.TimeTaken / 60000, // Convert ms to minutes
+      value: item.attributes.TimeTaken / 60000 // Convert ms to minutes
     };
   });
 

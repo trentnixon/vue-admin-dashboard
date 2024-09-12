@@ -1,13 +1,13 @@
-import { useSchedulerStore } from "../scheduler";
-import { useOrdersStore } from "../orders";
-import { useAssociationStore } from "../associationStore/index";
-import { useClubStore } from "../clubStore/index";
+import { useSchedulerStore } from '../scheduler';
+import { useOrdersStore } from '../orders';
+import { useAssociationStore } from '../associationStore/index';
+import { useClubStore } from '../clubStore/index';
 import {
   fetchAccountsFromService,
-  fetchAccountDetailsFromService,
-} from "./service";
-import { usePrivateAccountState } from "./private";
-import { Association, Club, Order } from "@/types"; // Import necessary types
+  fetchAccountDetailsFromService
+} from './service';
+import { usePrivateAccountState } from './private';
+import { Association, Club, Order } from '@/types'; // Import necessary types
 
 export async function fetchAccounts() {
   const state = usePrivateAccountState();
@@ -17,7 +17,7 @@ export async function fetchAccounts() {
     if (response && response.data) {
       state.accounts = response.data;
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -60,7 +60,7 @@ export async function fetchAccountDetails(id: number) {
         theme: attributes.theme,
         trial_instance: attributes.trial_instance,
         subscription_tier: attributes.subscription_tier,
-        sponsors: attributes.sponsors,
+        sponsors: attributes.sponsors
       };
 
       // Fetch and set the scheduler
@@ -82,7 +82,7 @@ export async function fetchAccountDetails(id: number) {
         const associationIds = attributes.associations.data.map(
           (association: Association) => association.id
         );
-        associationIds.forEach((id) => {
+        associationIds.forEach(id => {
           associationStore.fetchAssociation(id);
         });
       }
@@ -91,14 +91,14 @@ export async function fetchAccountDetails(id: number) {
       if (attributes.clubs) {
         const clubStore = useClubStore();
         const clubIds = attributes.clubs.data.map((club: Club) => club.id);
-        clubIds.forEach((id) => {
+        clubIds.forEach(id => {
           clubStore.fetchClub(id);
         });
       }
 
       // Fetch and set the renders
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

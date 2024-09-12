@@ -1,6 +1,10 @@
-import { usePrivateDataCollectionState } from "./private";
-import { fetchDataCollectionsFromService, fetchDataCollectionDetailsFromService, fetchAccountDataCollectionsFromService } from "./service";
-import { DataCollection } from "@/types";
+import { usePrivateDataCollectionState } from './private';
+import {
+  fetchDataCollectionsFromService,
+  fetchDataCollectionDetailsFromService,
+  fetchAccountDataCollectionsFromService
+} from './service';
+import { DataCollection } from '@/types';
 
 export async function fetchDataCollections() {
   const state = usePrivateDataCollectionState();
@@ -11,7 +15,7 @@ export async function fetchDataCollections() {
       state.dataCollections = response.data as DataCollection[];
       //console.log("Fetched data collections data:", state.dataCollections);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -29,7 +33,7 @@ export async function fetchDataCollectionDetails(id: number) {
       state.dataCollectionDetails = response.data as DataCollection;
       //console.log("Fetched data collection details:", state.dataCollectionDetails);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -47,7 +51,7 @@ export async function fetchAccountDataCollections(accountId: number) {
       state.accountDataCollections = response.data as DataCollection[];
       //console.log("Fetched account data collections data:", state.accountDataCollections);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -64,9 +68,8 @@ export async function fetchParentDataCollections() {
     const response = await fetchDataCollectionsFromService();
     if (response && response.data) {
       state.parentDataCollections = response.data as DataCollection[];
-
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+  import { defineComponent } from 'vue';
 
-// Components
+  // Components
 
-export default defineComponent({
-  name: "show-customers",
-});
+  export default defineComponent({
+    name: 'show-customers'
+  });
 </script>

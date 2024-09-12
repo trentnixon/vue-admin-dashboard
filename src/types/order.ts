@@ -1,4 +1,4 @@
-import { SubscriptionTier } from "@/types/subscriptionTier";
+import { SubscriptionTier } from '@/types/subscriptionTier';
 
 export interface OrderAttributes {
   Name: string;

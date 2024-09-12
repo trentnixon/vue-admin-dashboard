@@ -1,11 +1,11 @@
 export interface ThemeAttributes {
-    Name: string;
-    Theme: any; // assuming JSON object
-    CreatedBy: number;
-    isPublic: boolean;
-  }
+  Name: string;
+  Theme: any; // assuming JSON object
+  CreatedBy: number;
+  isPublic: boolean;
+}
 
-  export interface Theme {
-    id: number;
-    attributes: ThemeAttributes;
-  }
+export interface Theme {
+  id: number;
+  attributes: ThemeAttributes;
+}

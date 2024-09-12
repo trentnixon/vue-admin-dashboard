@@ -13,21 +13,21 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-const props = defineProps({
-  color: {
-    type: String,
-    default: "cardNeutral",
-  },
-  variant: {
-    type: String,
-    default: "flat",
-  },
-});
+  import { defineProps } from 'vue';
+  const props = defineProps({
+    color: {
+      type: String,
+      default: 'cardNeutral'
+    },
+    variant: {
+      type: String,
+      default: 'flat'
+    }
+  });
 </script>
 
 <style scoped>
-.chart {
-  height: 300px;
-}
+  .chart {
+    height: 300px;
+  }
 </style>

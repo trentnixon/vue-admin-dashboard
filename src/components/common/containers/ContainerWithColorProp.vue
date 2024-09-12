@@ -8,22 +8,22 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+  import { defineProps } from 'vue';
 
-const props = defineProps({
-  bgColor: {
-    type: String,
-    default: "blue-grey-lighten-2",
-  },
-  padding: {
-    type: String,
-    default: "pa-4",
-  },
-  margin: {
-    type: String,
-    default: "my-4",
-  },
-});
+  const props = defineProps({
+    bgColor: {
+      type: String,
+      default: 'blue-grey-lighten-2'
+    },
+    padding: {
+      type: String,
+      default: 'pa-4'
+    },
+    margin: {
+      type: String,
+      default: 'my-4'
+    }
+  });
 </script>
 
 <style scoped></style>

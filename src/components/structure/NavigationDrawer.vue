@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app  color="surface">
+  <v-navigation-drawer app color="surface">
     <v-list>
       <v-list-item
         prepend-avatar="/android-chrome-192x192.png"
@@ -25,44 +25,44 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+  import { ref } from 'vue';
 
-const topNavigationItems = ref([
-  {
-    to: "/dashboard/overview",
-    icon: "mdi-view-dashboard",
-    title: "Overview",
-  },
-  {
-    to: "/dashboard/accounts",
-    icon: "mdi-account",
-    title: "Accounts",
-  },
-  {
-    to: "/dashboard/customers/home",
-    icon: "mdi-currency-usd",
-    title: "Customers",
-  },
-  {
-    to: "/dashboard/schedulers",
-    icon: "mdi-calendar",
-    title: "Schedulers",
-  },
-  {
-    to: "/dashboard/marketing",
-    icon: "mdi-bullhorn",
-    title: "Marketing",
-  },
-  {
-    to: "/dashboard/settings",
-    icon: "mdi-cog",
-    title: "Settings",
-  },
-]);
+  const topNavigationItems = ref([
+    {
+      to: '/dashboard/overview',
+      icon: 'mdi-view-dashboard',
+      title: 'Overview'
+    },
+    {
+      to: '/dashboard/accounts',
+      icon: 'mdi-account',
+      title: 'Accounts'
+    },
+    {
+      to: '/dashboard/customers/home',
+      icon: 'mdi-currency-usd',
+      title: 'Customers'
+    },
+    {
+      to: '/dashboard/schedulers',
+      icon: 'mdi-calendar',
+      title: 'Schedulers'
+    },
+    {
+      to: '/dashboard/marketing',
+      icon: 'mdi-bullhorn',
+      title: 'Marketing'
+    },
+    {
+      to: '/dashboard/settings',
+      icon: 'mdi-cog',
+      title: 'Settings'
+    }
+  ]);
 </script>
 
 <style scoped>
-.v-navigation-drawer {
-  width: 256px;
-}
+  .v-navigation-drawer {
+    width: 256px;
+  }
 </style>

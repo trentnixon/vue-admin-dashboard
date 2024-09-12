@@ -7,12 +7,14 @@ export async function fetchAssociation(id: number) {
   state.loading = true;
   state.error = null;
   try {
-    const response = await fetcher.get<{ data: Association }>(`/associations/${id}?populate=*`);
+    const response = await fetcher.get<{ data: Association }>(
+      `/associations/${id}?populate=*`
+    );
     if (response && response.data) {
       state.association = response.data;
-      console.log("Fetched association details:", state.association);
+      console.log('Fetched association details:', state.association);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

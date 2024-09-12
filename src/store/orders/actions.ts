@@ -1,10 +1,10 @@
-import { usePrivateOrdersState } from "./private";
+import { usePrivateOrdersState } from './private';
 import {
   fetchOrdersFromService,
   fetchOrderDetailsFromService,
-  fetchOrdersByAccountIdFromService,
-} from "./service";
-import { Order } from "@/types";
+  fetchOrdersByAccountIdFromService
+} from './service';
+import { Order } from '@/types';
 
 /*
 fetchOrders: Fetch all orders.
@@ -24,7 +24,7 @@ export async function fetchOrders() {
       state.orders = response.data as Order[];
       //console.log("Fetched orders data:", state.orders);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -42,7 +42,7 @@ export async function fetchSingleOrder(orderId: number) {
       state.singleOrder = response.data as Order; // Store the single order
       //console.log("Fetched single order data:", state.singleOrder);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -58,13 +58,13 @@ export async function fetchAccountOrders(accountId: number) {
     const response = await fetchOrdersByAccountIdFromService(accountId);
     if (response && response.data) {
       state.accountOrders = response.data as Order[];
-     /*  console.log(
+      /*  console.log(
         "Fetched orders for account ID:",
         accountId,
         state.accountOrders
       ); */
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -97,11 +97,11 @@ export async function fetchActiveOrders() {
     const response = await fetchOrdersFromService();
     if (response && response.data) {
       state.activeOrders = response.data.filter(
-        (order) => order.attributes.isActive
+        order => order.attributes.isActive
       ) as Order[];
       //console.log("Fetched active orders data:", state.activeOrders);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -117,11 +117,11 @@ export async function fetchExpiredOrders() {
     const response = await fetchOrdersFromService();
     if (response && response.data) {
       state.expiredOrders = response.data.filter(
-        (order) => !order.attributes.isActive
+        order => !order.attributes.isActive
       ) as Order[];
       //console.log("Fetched expired orders data:", state.expiredOrders);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -143,7 +143,7 @@ export async function fetchOrdersForSelectedAccount(accountId: number) {
         state.selectedAccountOrders
       ); */
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

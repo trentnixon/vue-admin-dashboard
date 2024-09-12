@@ -21,18 +21,18 @@
 </template>
 
 <script setup lang="ts">
-import { useOrdersStore } from "@/store/orders";
-import CardSmall1DataPoint from "@/components/common/cards/CardSmall1DataPoint.vue";
-import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
-import { storeToRefs } from "pinia";
+  import { useOrdersStore } from '@/store/orders';
+  import CardSmall1DataPoint from '@/components/common/cards/CardSmall1DataPoint.vue';
+  import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
+  import { storeToRefs } from 'pinia';
 
-const ordersStore = useOrdersStore();
-//const { accountOrdersDetails } = storeToRefs(ordersStore);
-const { accountOrdersDetails } = storeToRefs(ordersStore);
+  const ordersStore = useOrdersStore();
+  //const { accountOrdersDetails } = storeToRefs(ordersStore);
+  const { accountOrdersDetails } = storeToRefs(ordersStore);
 
-const goToOrders = () => {
-  console.log("Button clicked");
-};
+  const goToOrders = () => {
+    console.log('Button clicked');
+  };
 </script>
 
 <style scoped></style>

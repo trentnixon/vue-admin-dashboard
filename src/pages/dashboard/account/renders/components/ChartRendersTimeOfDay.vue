@@ -15,67 +15,67 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import { storeToRefs } from "pinia";
-import { useRendersStore } from "@/store/renders";
-import ScatterChart from "@/components/common/charts/ScatterChart.vue";
-import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
-import { parseISO, format } from "date-fns";
+  import { ref, watch } from 'vue';
+  import { storeToRefs } from 'pinia';
+  import { useRendersStore } from '@/store/renders';
+  import ScatterChart from '@/components/common/charts/ScatterChart.vue';
+  import SingleChartCard from '@/components/common/cards/SingleChartCard.vue';
+  import { parseISO, format } from 'date-fns';
 
-// Store setup
-const rendersStore = useRendersStore();
-const { getRendersBySchedulerId } = storeToRefs(rendersStore);
+  // Store setup
+  const rendersStore = useRendersStore();
+  const { getRendersBySchedulerId } = storeToRefs(rendersStore);
 
-const scatterChartData = ref([]);
-const scatterChartCategories = ref([...Array(25).keys()].map((i) => i * 60)); // 0 to 1440 representing minutes since midnight
+  const scatterChartData = ref([]);
+  const scatterChartCategories = ref([...Array(25).keys()].map(i => i * 60)); // 0 to 1440 representing minutes since midnight
 
-const timeStringToMinutes = (timeString) => {
-  const [hours, minutes] = timeString.split(":").map(Number);
-  return hours * 60 + minutes;
-};
+  const timeStringToMinutes = timeString => {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
 
-const determineLifecycleCategory = (render) => {
-  const { hasTeamRosters, forceRerender } = render.attributes;
-  if (hasTeamRosters && forceRerender) {
-    return "hasTeamRosters - forceRerender - complete";
-  } else if (hasTeamRosters) {
-    return "hasTeamRosters - complete";
-  } else if (forceRerender) {
-    return "forceRerender - complete";
-  } else {
-    return "complete";
-  }
-};
-
-watch(
-  getRendersBySchedulerId,
-  (newRenders) => {
-    if (newRenders) {
-      scatterChartData.value = newRenders.map((render) => {
-        const startTime = parseISO(render.attributes.publishedAt);
-        const duration =
-          (parseISO(render.attributes.updatedAt) - startTime) / 60000; // Convert to minutes
-        const lifecycleCategory = determineLifecycleCategory(render);
-        const startTimeMinutes = timeStringToMinutes(
-          format(startTime, "HH:mm")
-        );
-
-        return {
-          name: render.attributes.Name,
-          value: [startTimeMinutes, duration],
-          category: lifecycleCategory,
-        };
-      });
+  const determineLifecycleCategory = render => {
+    const { hasTeamRosters, forceRerender } = render.attributes;
+    if (hasTeamRosters && forceRerender) {
+      return 'hasTeamRosters - forceRerender - complete';
+    } else if (hasTeamRosters) {
+      return 'hasTeamRosters - complete';
+    } else if (forceRerender) {
+      return 'forceRerender - complete';
     } else {
-      scatterChartData.value = [];
+      return 'complete';
     }
-  },
-  { immediate: true }
-);
+  };
+
+  watch(
+    getRendersBySchedulerId,
+    newRenders => {
+      if (newRenders) {
+        scatterChartData.value = newRenders.map(render => {
+          const startTime = parseISO(render.attributes.publishedAt);
+          const duration =
+            (parseISO(render.attributes.updatedAt) - startTime) / 60000; // Convert to minutes
+          const lifecycleCategory = determineLifecycleCategory(render);
+          const startTimeMinutes = timeStringToMinutes(
+            format(startTime, 'HH:mm')
+          );
+
+          return {
+            name: render.attributes.Name,
+            value: [startTimeMinutes, duration],
+            category: lifecycleCategory
+          };
+        });
+      } else {
+        scatterChartData.value = [];
+      }
+    },
+    { immediate: true }
+  );
 </script>
 
 <style scoped>
-.chart {
-  height: 300px;
-}
+  .chart {
+    height: 300px;
+  }
 </style>

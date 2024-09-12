@@ -6,7 +6,7 @@
   </ViewTitleBanner>
   <SchedulerInformation />
   <SectionContainerWithTitle>
-    <template #title> Overview </template>
+    <template #title>Overview</template>
     <template #content>
       <v-row>
         <v-col cols="4">
@@ -24,7 +24,7 @@
   <TableListOfAccountRenders />
 
   <SectionContainerWithTitle>
-    <template #title> Render Metrics </template>
+    <template #title>Render Metrics</template>
     <template #content>
       <v-row>
         <v-col cols="8">
@@ -39,22 +39,22 @@
 </template>
 
 <script setup lang="ts">
-// vue
-import { ref } from "vue";
+  // vue
+  import { ref } from 'vue';
 
-// Pinia
+  // Pinia
 
-// Components
-import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import SchedulerInformation from "@/pages/dashboard/account/renders/components/SchedulerInformation.vue";
-import TableListOfAccountRenders from "@/pages/dashboard/account/renders/components/TableListOfAccountRenders.vue";
-import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
-import ChartRendersTimeOfDay from "@/pages/dashboard/account/renders/components/ChartRendersTimeOfDay.vue";
-import ChartTimeComparison from "@/pages/dashboard/account/renders/components/ChartTimeComparison.vue";
-import CardSmallHasTeamRosters from "@/pages/dashboard/account/renders/components/CardSmallHasTeamRosters.vue";
-import CardSmallForceRerender from "@/pages/dashboard/account/renders/components/CardSmallForceRerender.vue";
-import CardSmallAverageRenderTime from "@/pages/dashboard/account/renders/components/CardSmallAverageRenderTime.vue";
+  // Components
+  import ViewTitleBanner from '@/components/common/builds/ViewTitleBanner.vue';
+  import SchedulerInformation from '@/pages/dashboard/account/renders/components/SchedulerInformation.vue';
+  import TableListOfAccountRenders from '@/pages/dashboard/account/renders/components/TableListOfAccountRenders.vue';
+  import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
+  import ChartRendersTimeOfDay from '@/pages/dashboard/account/renders/components/ChartRendersTimeOfDay.vue';
+  import ChartTimeComparison from '@/pages/dashboard/account/renders/components/ChartTimeComparison.vue';
+  import CardSmallHasTeamRosters from '@/pages/dashboard/account/renders/components/CardSmallHasTeamRosters.vue';
+  import CardSmallForceRerender from '@/pages/dashboard/account/renders/components/CardSmallForceRerender.vue';
+  import CardSmallAverageRenderTime from '@/pages/dashboard/account/renders/components/CardSmallAverageRenderTime.vue';
 
-// Vars
-const title = ref("Renders");
+  // Vars
+  const title = ref('Renders');
 </script>

@@ -28,25 +28,25 @@
 </template>
 
 <script setup lang="ts">
-// structure
-import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
-// Components
-import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import DataCollectionTracking from "@/pages/dashboard/account/data/components/DataCollectionTracking.vue";
-import ResultCollectionTracking from "@/pages/dashboard/account/data/components/ResultCollectionTracking.vue";
-import MetaDataTracking from "@/pages/dashboard/account/data/components/MetaDataTracking.vue";
-// Vue
-import { ref } from "vue";
-// Pinia
-import { useDataCollectionStore } from "@/store/dataCollection";
-import { storeToRefs } from "pinia";
+  // structure
+  import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
+  // Components
+  import ViewTitleBanner from '@/components/common/builds/ViewTitleBanner.vue';
+  import DataCollectionTracking from '@/pages/dashboard/account/data/components/DataCollectionTracking.vue';
+  import ResultCollectionTracking from '@/pages/dashboard/account/data/components/ResultCollectionTracking.vue';
+  import MetaDataTracking from '@/pages/dashboard/account/data/components/MetaDataTracking.vue';
+  // Vue
+  import { ref } from 'vue';
+  // Pinia
+  import { useDataCollectionStore } from '@/store/dataCollection';
+  import { storeToRefs } from 'pinia';
 
-// Globals
-const title = ref("Data Tracking");
+  // Globals
+  const title = ref('Data Tracking');
 
-// Data Collections
-const dataCollectionStore = useDataCollectionStore();
-const { accountDataCollectionCount } = storeToRefs(dataCollectionStore);
+  // Data Collections
+  const dataCollectionStore = useDataCollectionStore();
+  const { accountDataCollectionCount } = storeToRefs(dataCollectionStore);
 </script>
 
 <style lang="scss" scoped></style>

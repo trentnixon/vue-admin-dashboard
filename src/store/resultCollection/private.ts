@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { ResultCollection } from "@/types";
+import { defineStore } from 'pinia';
+import { ResultCollection } from '@/types';
 
 export interface PrivateResultCollectionState {
   resultCollections: ResultCollection[];
@@ -9,12 +9,15 @@ export interface PrivateResultCollectionState {
   error: string | null;
 }
 
-export const usePrivateResultCollectionState = defineStore("resultCollection-private", {
-  state: (): PrivateResultCollectionState => ({
-    resultCollections: [],
-    accountResultCollections: [],
-    resultCollectionDetails: null,
-    loading: false,
-    error: null,
-  }),
-});
+export const usePrivateResultCollectionState = defineStore(
+  'resultCollection-private',
+  {
+    state: (): PrivateResultCollectionState => ({
+      resultCollections: [],
+      accountResultCollections: [],
+      resultCollectionDetails: null,
+      loading: false,
+      error: null
+    })
+  }
+);

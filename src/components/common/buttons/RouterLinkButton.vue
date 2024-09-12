@@ -1,12 +1,20 @@
 <template>
-    <router-link :to="path" custom v-slot="{ navigate, href }">
-      <v-btn :href="href" :color="color" :dark="dark" :outlined="outlined" :loading="loading" :disabled="disabled" @click="navigate">
-        <slot></slot>
-      </v-btn>
-    </router-link>
-  </template>
+  <router-link :to="path" custom v-slot="{ navigate, href }">
+    <v-btn
+      :href="href"
+      :color="color"
+      :dark="dark"
+      :outlined="outlined"
+      :loading="loading"
+      :disabled="disabled"
+      @click="navigate"
+    >
+      <slot></slot>
+    </v-btn>
+  </router-link>
+</template>
 
-  <script setup lang="ts">
+<script setup lang="ts">
   import { defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
@@ -37,7 +45,6 @@
   });
 
   const emit = defineEmits(['click']);
-  </script>
+</script>
 
-  <style scoped>
-  </style>
+<style scoped></style>

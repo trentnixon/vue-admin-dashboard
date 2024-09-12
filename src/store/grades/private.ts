@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { Grade } from "@/types";
+import { defineStore } from 'pinia';
+import { Grade } from '@/types';
 
 export interface PrivateGradesState {
   grade: Grade | null;
@@ -8,11 +8,11 @@ export interface PrivateGradesState {
   error: string | null;
 }
 
-export const usePrivateGradesState = defineStore("grades-private", {
+export const usePrivateGradesState = defineStore('grades-private', {
   state: (): PrivateGradesState => ({
     grade: null,
     grades: [],
     loading: false,
-    error: null,
-  }),
+    error: null
+  })
 });

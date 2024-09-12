@@ -3,7 +3,7 @@
 </template>
 <script setup></script>
 <style>
-.titleFont{
+  .titleFont {
     font-size: 4em;
-}
+  }
 </style>

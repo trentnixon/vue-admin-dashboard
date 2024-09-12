@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { GameDataNetball } from "@/types";
+import { defineStore } from 'pinia';
+import { GameDataNetball } from '@/types';
 
 export interface PrivateGameDataNetballState {
   gameDataNetball: GameDataNetball | null;
@@ -8,11 +8,14 @@ export interface PrivateGameDataNetballState {
   error: string | null;
 }
 
-export const usePrivateGameDataNetballState = defineStore("gameDataNetball-private", {
-  state: (): PrivateGameDataNetballState => ({
-    gameDataNetball: null,
-    gameDataNetballs: [],
-    loading: false,
-    error: null,
-  }),
-});
+export const usePrivateGameDataNetballState = defineStore(
+  'gameDataNetball-private',
+  {
+    state: (): PrivateGameDataNetballState => ({
+      gameDataNetball: null,
+      gameDataNetballs: [],
+      loading: false,
+      error: null
+    })
+  }
+);

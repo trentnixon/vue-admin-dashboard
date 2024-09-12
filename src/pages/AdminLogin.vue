@@ -27,36 +27,36 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/store/auth/auth';
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { useAuthStore } from '@/store/auth/auth';
 
-export default {
-  setup() {
-    const username = ref('');
-    const password = ref('');
-    const authStore = useAuthStore();
-    const router = useRouter();
+  export default {
+    setup() {
+      const username = ref('');
+      const password = ref('');
+      const authStore = useAuthStore();
+      const router = useRouter();
 
-    const handleLogin = () => {
-      if (authStore.login(username.value, password.value)) {
-        router.push({ path: '/dashboard/overview' });
-      } else {
-        alert('Invalid credentials');
-      }
-    };
+      const handleLogin = () => {
+        if (authStore.login(username.value, password.value)) {
+          router.push({ path: '/dashboard/overview' });
+        } else {
+          alert('Invalid credentials');
+        }
+      };
 
-    return {
-      username,
-      password,
-      handleLogin,
-    };
-  },
-};
+      return {
+        username,
+        password,
+        handleLogin
+      };
+    }
+  };
 </script>
 
 <style scoped>
-.v-container {
-  margin-top: 50px;
-}
+  .v-container {
+    margin-top: 50px;
+  }
 </style>

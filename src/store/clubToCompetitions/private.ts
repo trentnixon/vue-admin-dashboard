@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { ClubToCompetition } from "@/types";
+import { defineStore } from 'pinia';
+import { ClubToCompetition } from '@/types';
 
 export interface PrivateClubToCompetitionState {
   clubToCompetition: ClubToCompetition | null;
@@ -8,11 +8,14 @@ export interface PrivateClubToCompetitionState {
   error: string | null;
 }
 
-export const usePrivateClubToCompetitionState = defineStore("clubToCompetition-private", {
-  state: (): PrivateClubToCompetitionState => ({
-    clubToCompetition: null,
-    clubToCompetitions: [],
-    loading: false,
-    error: null,
-  }),
-});
+export const usePrivateClubToCompetitionState = defineStore(
+  'clubToCompetition-private',
+  {
+    state: (): PrivateClubToCompetitionState => ({
+      clubToCompetition: null,
+      clubToCompetitions: [],
+      loading: false,
+      error: null
+    })
+  }
+);

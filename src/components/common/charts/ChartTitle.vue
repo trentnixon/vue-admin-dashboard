@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-// No additional script needed for this basic component
+  // No additional script needed for this basic component
 </script>
 
 <style scoped>
-/* Add any specific styles for the component if needed */
+  /* Add any specific styles for the component if needed */
 </style>

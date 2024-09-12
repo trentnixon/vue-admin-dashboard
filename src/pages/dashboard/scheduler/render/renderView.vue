@@ -1,11 +1,9 @@
 <template>
   <ViewTitleBanner>
     <template #title>
-      Render Details
+      {{ useRender?.attributes.Name }}
     </template>
   </ViewTitleBanner>
-
-  <SchedulerStatusChips />
   <SectionContainerWithTitle>
     <template #title>
       <RenderStatusChips />
@@ -27,63 +25,56 @@
       </v-row>
     </template>
   </SectionContainerWithTitle>
+  <SchedulerInformationWidget />
+  <DownloadInformationWidget />
   <EmailStatusChips />
   <TeamRostersChips />
 
-
-
-  <div v-if="useRender">
+  <!--  <div v-if="useRender">
     <pre>{{ JSON.stringify(useRender, null, 2) }}</pre>
   </div>
   <div v-else>
     Loading...
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">
-// Vue
-import { ref, onMounted, computed, watchEffect } from "vue";
-import { useRoute } from "vue-router";
-// Pinia
-import { storeToRefs } from "pinia";
-import { useRendersStore } from "@/store/renders";
-// Components
-import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import RenderStatusChips from "@/pages/dashboard/scheduler/render/components/RenderStatusChips.vue";
-import EmailStatusChips from "@/pages/dashboard/scheduler/render/components/EmailStatusChips.vue";
-import TeamRostersChips from "@/pages/dashboard/scheduler/render/components/TeamRostersChips.vue";
-import SchedulerStatusChips from "@/pages/dashboard/scheduler/render/components/SchedulerStatusChips.vue";
-import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
-import DownloadCountCard from "@/pages/dashboard/scheduler/render/components/DownloadCountCard.vue";
-import AIArticlesCountCard from "@/pages/dashboard/scheduler/render/components/AIArticlesCountCard.vue";
-import GamesInRenderCountCard from "@/pages/dashboard/scheduler/render/components/GamesInRenderCountCard.vue";
-import FixturesInRenderCountCard from "@/pages/dashboard/scheduler/render/components/FixturesInRenderCountCard.vue";
+  // Vue
+  import { onMounted } from 'vue';
+  import { useRoute } from 'vue-router';
+  // Pinia
+  import { useRendersStore } from '@/store/renders';
+  import { useDownloadsStore } from '@/store/downloads'; // Make sure this import path is correct
 
-// Get route parameters
-const route = useRoute();
-const schedulerId = Number(route.params.schedulerId);
-const renderId = Number(route.params.renderId);
+  // Components
+  import ViewTitleBanner from '@/components/common/builds/ViewTitleBanner.vue';
+  import RenderStatusChips from '@/pages/dashboard/scheduler/render/components/RenderStatusChips.vue';
+  import EmailStatusChips from '@/pages/dashboard/scheduler/render/components/EmailStatusChips.vue';
+  import TeamRostersChips from '@/pages/dashboard/scheduler/render/components/TeamRostersChips.vue';
+  import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
+  import DownloadCountCard from '@/pages/dashboard/scheduler/render/components/DownloadCountCard.vue';
+  import AIArticlesCountCard from '@/pages/dashboard/scheduler/render/components/AIArticlesCountCard.vue';
+  import GamesInRenderCountCard from '@/pages/dashboard/scheduler/render/components/GamesInRenderCountCard.vue';
+  import FixturesInRenderCountCard from '@/pages/dashboard/scheduler/render/components/FixturesInRenderCountCard.vue';
+  import SchedulerInformationWidget from '@/pages/dashboard/scheduler/render/components/SchedulerInformationWidget.vue';
+  import DownloadInformationWidget from '@/pages/dashboard/scheduler/render/components/DownloadInformationWidget.vue';
 
-// Render store
-const renderStore = useRendersStore();
-const { selectedRender } = storeToRefs(renderStore);
+  // Get route parameters
+  const route = useRoute();
+  //const schedulerId = Number(route.params.schedulerId);
+  const renderId = Number(route.params.renderId);
 
-const useRender = computed(() => selectedRender.value);
+  // Render store
+  const renderStore = useRendersStore();
+  // Download Store
+  const downloadStore = useDownloadsStore();
 
-console.log("useRender ", useRender?.value);
-
-// Fetch render on component mount
-onMounted(async () => {
-  console.log("route.params ", route.params);
-  await renderStore.fetchRenderById(renderId);
-});
-
-// Watch for changes to selectedRender
-watchEffect(() => {
-  if (useRender.value) {
-    console.log("useRender updated: ", useRender.value);
-  }
-});
+  // Fetch render on component mount
+  onMounted(async () => {
+    console.log('route.params ', route.params);
+    await renderStore.fetchRenderById(renderId);
+    await downloadStore.fetchDownloadsByRenderId(renderId);
+  });
 </script>
 <!--
     Basic Information Name: render.attributes.Name Processing Status:

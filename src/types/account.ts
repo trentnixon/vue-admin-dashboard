@@ -1,12 +1,12 @@
-import { Order } from "./order";
-import { Association } from "./association";
-import { Club } from "./club";
-import { RenderToken } from "./renderToken";
-import { Template } from "./template";
-import { Theme } from "./theme";
-import { TrialInstance } from "./trialInstance";
-import { SubscriptionTier } from "./subscriptionTier";
-import { Render } from "@/types/render";
+import { Order } from './order';
+import { Association } from './association';
+import { Club } from './club';
+import { RenderToken } from './renderToken';
+import { Template } from './template';
+import { Theme } from './theme';
+import { TrialInstance } from './trialInstance';
+import { SubscriptionTier } from './subscriptionTier';
+import { Render } from '@/types/render';
 
 export interface AccountAttributes {
   updatedAt: string;
@@ -32,7 +32,7 @@ export interface AccountAttributes {
   template: { data: Template } | null;
   theme: { data: Theme } | null;
   trial_instance: { data: TrialInstance } | null;
-  renders:{ data: Render[] } | null;
+  renders: { data: Render[] } | null;
   subscription_tier: { data: SubscriptionTier } | null;
   sponsors: { data: SubscriptionTier } | null;
 }

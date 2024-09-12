@@ -12,36 +12,36 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
+  import { defineProps, defineEmits } from 'vue';
 
-const props = defineProps({
-  color: {
-    type: String,
-    default: "primary",
-  },
-  dark: {
-    type: Boolean,
-    default: true,
-  },
-  outlined: {
-    type: String,
-    default: 'outlined',
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+  const props = defineProps({
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    dark: {
+      type: Boolean,
+      default: true
+    },
+    outlined: {
+      type: String,
+      default: 'outlined'
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  });
 
-const emit = defineEmits(["click"]);
+  const emit = defineEmits(['click']);
 
-const onClick = (event: Event) => {
-  emit("click", event);
-};
+  const onClick = (event: Event) => {
+    emit('click', event);
+  };
 </script>
 
 <style scoped></style>

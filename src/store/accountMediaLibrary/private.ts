@@ -8,10 +8,13 @@ export interface PrivateAccountMediaLibraryState {
   error: string | null;
 }
 
-export const usePrivateAccountMediaLibraryState = defineStore('accountMediaLibrary-private', {
-  state: (): PrivateAccountMediaLibraryState => ({
-    accountMediaLibraries: [],
-    loading: false,
-    error: null,
-  }),
-});
+export const usePrivateAccountMediaLibraryState = defineStore(
+  'accountMediaLibrary-private',
+  {
+    state: (): PrivateAccountMediaLibraryState => ({
+      accountMediaLibraries: [],
+      loading: false,
+      error: null
+    })
+  }
+);

@@ -14,21 +14,21 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'Home',
-        component: AdminLogin,
-      },
-    ],
+        component: AdminLogin
+      }
+    ]
   },
   {
     path: '/dashboard',
     component: DashboardLayout,
     meta: { requiresAuth: true },
-    children: [...dashboardRoutes],
-  },
+    children: [...dashboardRoutes]
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes
 });
 
 router.beforeEach((to, from, next) => {

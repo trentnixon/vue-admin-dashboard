@@ -12,26 +12,26 @@ const accountRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'home',
-        component: rootView,
+        component: rootView
       },
       {
         path: 'data',
-        component: AccountData,
+        component: AccountData
       },
       {
         path: 'season',
-        component: SeasonView,
+        component: SeasonView
       },
       {
         path: 'medialibrary',
-        component: MediaLibraries,
+        component: MediaLibraries
       },
       {
         path: 'renders',
-        component: DisplayRenders,
-      },
-    ],
-  },
+        component: DisplayRenders
+      }
+    ]
+  }
 ];
 
 export default accountRoutes;

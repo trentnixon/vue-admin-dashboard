@@ -8,7 +8,7 @@
     <AccountTable />
 
     <SectionContainerWithTitle>
-      <template #title> Account Metrics </template>
+      <template #title>Account Metrics</template>
       <template #content>
         <v-row>
           <v-col cols="12">
@@ -45,7 +45,7 @@
     </SectionContainerWithTitle>
 
     <SectionContainerWithTitle>
-      <template #title> Sponsors </template>
+      <template #title>Sponsors</template>
       <template #content>
         <v-row>
           <v-col cols="4">
@@ -61,43 +61,43 @@
 </template>
 
 <script setup lang="ts">
-import ViewTitleBanner from "@/components/common/builds/ViewTitleBanner.vue";
-import SectionContainerWithTitle from "@/components/common/builds/SectionContainerWithTitle.vue";
+  import ViewTitleBanner from '@/components/common/builds/ViewTitleBanner.vue';
+  import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
 
-//Cards
-import SportsDistributionCard from "@/pages/dashboard/accounts/components/SportsDistributionCard.vue";
-// Tables
-import AccountTable from "@/pages/dashboard/accounts/components/AccountTable.vue";
-import TrialLogoGallery from "@/pages/dashboard/accounts/components/TrialLogoGallery.vue";
-// Charts
-import SignUpTrend from "@/pages/dashboard/index/components/GeneralMetrics/SignUpTrend.vue";
+  //Cards
+  import SportsDistributionCard from '@/pages/dashboard/accounts/components/SportsDistributionCard.vue';
+  // Tables
+  import AccountTable from '@/pages/dashboard/accounts/components/AccountTable.vue';
+  import TrialLogoGallery from '@/pages/dashboard/accounts/components/TrialLogoGallery.vue';
+  // Charts
+  import SignUpTrend from '@/pages/dashboard/index/components/GeneralMetrics/SignUpTrend.vue';
 
-import ActiveOrdersPieChart from "@/pages/dashboard/accounts/components/ActiveOrdersPieChart.vue";
-import FreeTrialStatusPieChart from "@/pages/dashboard/accounts/components/FreeTrialStatusPieChart.vue";
-import AccountTypeSplitPieChart from "@/pages/dashboard/accounts/components/AccountTypeSplitPieChart.vue";
-import TemplateRatioSplitCard from "@/pages/dashboard/accounts/components/TemplateRatioSplitCard.vue";
-import SponsorsStatusPieChart from "@/pages/dashboard/accounts/components/SponsorsStatusPieChart.vue";
-import SponsorsMetrics from "@/pages/dashboard/accounts/components/SponsorsMetrics.vue";
-// Card
-import Card_TotalSignups from "@/pages/dashboard/index/components/GeneralMetrics/Card_TotalSignups.vue";
+  import ActiveOrdersPieChart from '@/pages/dashboard/accounts/components/ActiveOrdersPieChart.vue';
+  import FreeTrialStatusPieChart from '@/pages/dashboard/accounts/components/FreeTrialStatusPieChart.vue';
+  import AccountTypeSplitPieChart from '@/pages/dashboard/accounts/components/AccountTypeSplitPieChart.vue';
+  import TemplateRatioSplitCard from '@/pages/dashboard/accounts/components/TemplateRatioSplitCard.vue';
+  import SponsorsStatusPieChart from '@/pages/dashboard/accounts/components/SponsorsStatusPieChart.vue';
+  import SponsorsMetrics from '@/pages/dashboard/accounts/components/SponsorsMetrics.vue';
+  // Card
+  import Card_TotalSignups from '@/pages/dashboard/index/components/GeneralMetrics/Card_TotalSignups.vue';
 
-// Dependencies
-import { onMounted, ref } from "vue";
-import { useAccountStore } from "@/store/account";
-import { useOrdersStore } from "@/store/orders";
-// Get Stores
-const accountStore = useAccountStore();
-const ordersStore = useOrdersStore();
-const title = ref("Account Overview");
+  // Dependencies
+  import { onMounted, ref } from 'vue';
+  import { useAccountStore } from '@/store/account';
+  import { useOrdersStore } from '@/store/orders';
+  // Get Stores
+  const accountStore = useAccountStore();
+  const ordersStore = useOrdersStore();
+  const title = ref('Account Overview');
 
-onMounted(() => {
-  accountStore.fetchAccounts();
-  ordersStore.fetchOrders();
-});
+  onMounted(() => {
+    accountStore.fetchAccounts();
+    ordersStore.fetchOrders();
+  });
 </script>
 
 <style scoped>
-.elevation-1 {
-  margin-bottom: 20px;
-}
+  .elevation-1 {
+    margin-bottom: 20px;
+  }
 </style>

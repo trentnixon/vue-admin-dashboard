@@ -1,5 +1,5 @@
-import fetcher from "@/actions/fetcher";
-import { ResultCollection } from "@/types";
+import fetcher from '@/actions/fetcher';
+import { ResultCollection } from '@/types';
 
 interface ApiResponse<T> {
   data: T;
@@ -9,7 +9,7 @@ export async function fetchResultCollectionsFromService(): Promise<
   ApiResponse<ResultCollection[]>
 > {
   const response = await fetcher.get<ApiResponse<ResultCollection[]>>(
-    "/result-collections?populate=*"
+    '/result-collections?populate=*'
   );
   return response;
 }

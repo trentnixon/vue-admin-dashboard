@@ -1,16 +1,16 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-console.log("process.env ", process.env)
+console.log('process.env ', process.env);
 const apiBaseUrl = process.env.VUE_APP_API_BASE_URL;
 const apiKey = process.env.VUE_APP_API_KEY;
 
-  console.log("apiBaseUrl ", apiBaseUrl)
+console.log('apiBaseUrl ', apiBaseUrl);
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: apiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`
+    Authorization: `Bearer ${apiKey}`
   }
 });
 
@@ -24,18 +24,34 @@ const fetcher = {
     }
   },
 
-  post: async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+  post: async <T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> => {
     try {
-      const response: AxiosResponse<T> = await axiosInstance.post(url, data, config);
+      const response: AxiosResponse<T> = await axiosInstance.post(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
     }
   },
 
-  put: async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+  put: async <T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> => {
     try {
-      const response: AxiosResponse<T> = await axiosInstance.put(url, data, config);
+      const response: AxiosResponse<T> = await axiosInstance.put(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -44,7 +60,10 @@ const fetcher = {
 
   delete: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
     try {
-      const response: AxiosResponse<T> = await axiosInstance.delete(url, config);
+      const response: AxiosResponse<T> = await axiosInstance.delete(
+        url,
+        config
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -66,7 +85,10 @@ interface AxiosError {
 const handleError = (error: unknown): never => {
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError;
-    console.error('Axios error:', axiosError.response?.data || axiosError.message);
+    console.error(
+      'Axios error:',
+      axiosError.response?.data || axiosError.message
+    );
   } else {
     console.error('Unexpected error:', error);
   }

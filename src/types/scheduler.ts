@@ -1,4 +1,4 @@
-import { Render } from "@/types/render";
+import { Render } from '@/types/render';
 
 export interface SchedulerAttributes {
   Name: string;

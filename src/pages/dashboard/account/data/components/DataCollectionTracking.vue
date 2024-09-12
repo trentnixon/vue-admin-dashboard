@@ -9,9 +9,9 @@
     <v-col cols="12">
       <SingleChartCard>
         <template #title>Time Taken for Data Collections</template>
-        <template #subtitle
-          >Track the time taken for each data collection over time</template
-        >
+        <template #subtitle>
+          Track the time taken for each data collection over time
+        </template>
         <template #chart>
           <v-toolbar flat class="px-4" color="secondary" rounded>
             <v-toolbar-title class="d-flex justify-space-between">
@@ -42,7 +42,8 @@
                 :headers="headers"
                 :items="timeTableData"
                 class="elevation-1"
-                ><template v-slot:body="{ items }">
+              >
+                <template v-slot:body="{ items }">
                   <tr v-for="item in items" :key="item.scannedDeviceId">
                     <td>{{ item.date }}</td>
                     <td>{{ item.value }}</td>
@@ -56,8 +57,8 @@
                       </v-icon>
                     </td>
                   </tr>
-                </template></v-data-table
-              >
+                </template>
+              </v-data-table>
             </v-tabs-window-item>
             <v-tabs-window-item value="memory">
               <LineChart
@@ -86,8 +87,8 @@
                       </v-icon>
                     </td>
                   </tr>
-                </template></v-data-table
-              >
+                </template>
+              </v-data-table>
             </v-tabs-window-item>
           </v-tabs-window>
         </template>
@@ -97,79 +98,81 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import { useDataCollectionStore } from "@/store/dataCollection";
-import { useRoute } from "vue-router";
-import { storeToRefs } from "pinia";
-import SingleChartCard from "@/components/common/cards/SingleChartCard.vue";
-import { filterCollectionsForChart } from "@/utils/dateUtils";
-import dayjs from "dayjs";
-import CardDataCollectionTimeTakenSummary from "./CardDataCollectionTimeTakenSummary.vue";
-import CardMemoryTrackingSummary from "./CardMemoryTrackingSummary.vue";
-import LineChart from "@/components/common/charts/LineChart.vue";
+  import { ref, onMounted, watch } from 'vue';
+  import { useDataCollectionStore } from '@/store/dataCollection';
+  import { useRoute } from 'vue-router';
+  import { storeToRefs } from 'pinia';
+  import SingleChartCard from '@/components/common/cards/SingleChartCard.vue';
+  import { filterCollectionsForChart } from '@/utils/dateUtils';
+  import dayjs from 'dayjs';
+  import CardDataCollectionTimeTakenSummary from './CardDataCollectionTimeTakenSummary.vue';
+  import CardMemoryTrackingSummary from './CardMemoryTrackingSummary.vue';
+  import LineChart from '@/components/common/charts/LineChart.vue';
 
-const route = useRoute();
-const accountId = Number(route.params.id);
+  const route = useRoute();
+  const accountId = Number(route.params.id);
 
-const dataCollectionStore = useDataCollectionStore();
-const { accountDataCollections } = storeToRefs(dataCollectionStore);
+  const dataCollectionStore = useDataCollectionStore();
+  const { accountDataCollections } = storeToRefs(dataCollectionStore);
 
-const timeTakenData = ref([]);
-const timeTakenCategories = ref([]);
-const memoryUsageData = ref([]);
-const memoryUsageCategories = ref([]);
-const dateRanges = ref([30, 60, 90]);
-const selectedRange = ref(30);
-const tab = ref("time");
+  const timeTakenData = ref([]);
+  const timeTakenCategories = ref([]);
+  const memoryUsageData = ref([]);
+  const memoryUsageCategories = ref([]);
+  const dateRanges = ref([30, 60, 90]);
+  const selectedRange = ref(30);
+  const tab = ref('time');
 
-const headers = [
-  { title: "Date", value: "date" },
-  { title: "Value", value: "value" },
-  { title: "Processed", value: "hasError" },
-];
+  const headers = [
+    { title: 'Date', value: 'date' },
+    { title: 'Value', value: 'value' },
+    { title: 'Processed', value: 'hasError' }
+  ];
 
-const timeTableData = ref([]);
-const memoryTableData = ref([]);
+  const timeTableData = ref([]);
+  const memoryTableData = ref([]);
 
-const fetchAccountDataCollections = async (id) => {
-  await dataCollectionStore.fetchAccountDataCollections(id);
-};
+  const fetchAccountDataCollections = async id => {
+    await dataCollectionStore.fetchAccountDataCollections(id);
+  };
 
-watch([accountDataCollections, selectedRange], () => {
-  const filteredCollections = accountDataCollections.value.filter((item) => {
-    const collectionDate = dayjs(item.attributes.whenWasTheLastCollection);
-    return collectionDate.isAfter(dayjs().subtract(selectedRange.value, "day"));
+  watch([accountDataCollections, selectedRange], () => {
+    const filteredCollections = accountDataCollections.value.filter(item => {
+      const collectionDate = dayjs(item.attributes.whenWasTheLastCollection);
+      return collectionDate.isAfter(
+        dayjs().subtract(selectedRange.value, 'day')
+      );
+    });
+
+    const { dateArray: timeDates, dataPoints: timeData } =
+      filterCollectionsForChart(filteredCollections, 'TimeTaken');
+    timeTakenCategories.value = timeDates;
+
+    timeTakenData.value = timeData.map(value => (value / 60000)?.toFixed(2)); // Convert seconds to minutes
+    timeTableData.value = timeDates.map((date, index) => ({
+      date,
+      value: timeTakenData.value[index] + ' mins',
+      hasError: filteredCollections[index].attributes.hasError
+    }));
+    console.log('timeTableData ', timeTableData);
+    const { dateArray: memoryDates, dataPoints: memoryData } =
+      filterCollectionsForChart(filteredCollections, 'MemoryUsage');
+    memoryUsageCategories.value = memoryDates;
+    memoryUsageData.value = memoryData.map(value => value?.toFixed(2)); // Convert KB to MB
+    memoryTableData.value = memoryDates.map((date, index) => ({
+      date,
+      value: memoryUsageData.value[index] + ' MB',
+      hasError: filteredCollections[index].attributes.hasError
+    }));
   });
 
-  const { dateArray: timeDates, dataPoints: timeData } =
-    filterCollectionsForChart(filteredCollections, "TimeTaken");
-  timeTakenCategories.value = timeDates;
-
-  timeTakenData.value = timeData.map((value) => (value / 60000)?.toFixed(2)); // Convert seconds to minutes
-  timeTableData.value = timeDates.map((date, index) => ({
-    date,
-    value: timeTakenData.value[index] + " mins",
-    hasError: filteredCollections[index].attributes.hasError,
-  }));
-  console.log("timeTableData ", timeTableData);
-  const { dateArray: memoryDates, dataPoints: memoryData } =
-    filterCollectionsForChart(filteredCollections, "MemoryUsage");
-  memoryUsageCategories.value = memoryDates;
-  memoryUsageData.value = memoryData.map((value) => value?.toFixed(2)); // Convert KB to MB
-  memoryTableData.value = memoryDates.map((date, index) => ({
-    date,
-    value: memoryUsageData.value[index] + " MB",
-    hasError: filteredCollections[index].attributes.hasError,
-  }));
-});
-
-onMounted(() => {
-  fetchAccountDataCollections(accountId);
-});
+  onMounted(() => {
+    fetchAccountDataCollections(accountId);
+  });
 </script>
 
 <style scoped>
-.chart {
-  height: 300px;
-}
+  .chart {
+    height: 300px;
+  }
 </style>

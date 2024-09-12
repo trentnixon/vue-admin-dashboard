@@ -1,16 +1,16 @@
 export interface ResultCollectionAttributes {
-    whenWasTheLastCollection: string;
-  }
+  whenWasTheLastCollection: string;
+}
 
-  export interface ResultCollection {
-    id: number;
-    attributes: ResultCollectionAttributes;
-  }
+export interface ResultCollection {
+  id: number;
+  attributes: ResultCollectionAttributes;
+}
 
-  export interface ResultCollectionState {
-    resultCollections: ResultCollection[];
-    accountResultCollections: ResultCollection[];
-    resultCollectionDetails: ResultCollection | null;
-    loading: boolean;
-    error: string | null;
-  }
+export interface ResultCollectionState {
+  resultCollections: ResultCollection[];
+  accountResultCollections: ResultCollection[];
+  resultCollectionDetails: ResultCollection | null;
+  loading: boolean;
+  error: string | null;
+}

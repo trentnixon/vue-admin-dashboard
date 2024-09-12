@@ -1,6 +1,9 @@
-import { usePrivateGameMetaDatasState } from "./private";
-import { fetchGameMetaDataFromService, fetchGameMetaDatasByTeamIdFromService } from "./service";
-import { GameMetaData } from "@/types";
+import { usePrivateGameMetaDatasState } from './private';
+import {
+  fetchGameMetaDataFromService,
+  fetchGameMetaDatasByTeamIdFromService
+} from './service';
+import { GameMetaData } from '@/types';
 
 export async function fetchGameMetaData(id: number) {
   const state = usePrivateGameMetaDatasState();
@@ -9,9 +12,9 @@ export async function fetchGameMetaData(id: number) {
     const response = await fetchGameMetaDataFromService(id);
     if (response && response.data) {
       state.gameMetaData = response.data as GameMetaData;
-      console.log("Fetched game meta data details:", state.gameMetaData);
+      console.log('Fetched game meta data details:', state.gameMetaData);
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -27,9 +30,13 @@ export async function fetchGameMetaDatasByTeamId(teamId: number) {
     const response = await fetchGameMetaDatasByTeamIdFromService(teamId);
     if (response && response.data) {
       state.gameMetaDatas = response.data as GameMetaData[];
-      console.log("Fetched game meta data for team ID:", teamId, state.gameMetaDatas);
+      console.log(
+        'Fetched game meta data for team ID:',
+        teamId,
+        state.gameMetaDatas
+      );
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

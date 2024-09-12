@@ -1,11 +1,11 @@
-import { RouteRecordRaw } from "vue-router";
-import rootView from "./rootView.vue";
+import { RouteRecordRaw } from 'vue-router';
+import rootView from './rootView.vue';
 
 const customerRoutes: Array<RouteRecordRaw> = [
   {
-    path: "customer",
-    component: rootView,
-  },
+    path: 'customer',
+    component: rootView
+  }
 ];
 
 export default customerRoutes;

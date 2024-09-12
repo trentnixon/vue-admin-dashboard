@@ -1,9 +1,9 @@
-import { usePrivateSchedulerState } from "./private";
+import { usePrivateSchedulerState } from './private';
 import {
   fetchSchedulerFromService,
   fetchAllSchedulersFromService,
-  fetchSchedulersDueTomorrowFromService,
-} from "./service";
+  fetchSchedulersDueTomorrowFromService
+} from './service';
 
 export async function fetchScheduler(id: number) {
   const state = usePrivateSchedulerState();
@@ -16,7 +16,7 @@ export async function fetchScheduler(id: number) {
     if (response && response.data) {
       state.scheduler = response.data;
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -35,7 +35,7 @@ export async function fetchAllSchedulers() {
     if (response && response.data) {
       state.schedulers = response.data;
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;
@@ -48,7 +48,6 @@ export function setScheduler(scheduler: { id: number }) {
   fetchScheduler(scheduler.id);
 }
 
-
 export async function fetchSchedulersDueTomorrow() {
   const state = usePrivateSchedulerState();
   try {
@@ -56,9 +55,12 @@ export async function fetchSchedulersDueTomorrow() {
     const response = await fetchSchedulersDueTomorrowFromService();
     if (response && response.data) {
       state.schedulersDueTomorrow = response.data.length;
-      console.log("Fetched schedulers due tomorrow:", state.schedulersDueTomorrow);
+      console.log(
+        'Fetched schedulers due tomorrow:',
+        state.schedulersDueTomorrow
+      );
     } else {
-      throw new Error("Invalid data structure");
+      throw new Error('Invalid data structure');
     }
   } catch (error) {
     state.error = (error as Error).message;

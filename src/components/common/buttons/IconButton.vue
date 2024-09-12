@@ -1,10 +1,17 @@
 <template>
-    <v-btn icon :color="color" :dark="dark" :loading="loading" :disabled="disabled" @click="onClick">
-      <v-icon>{{ icon }}</v-icon>
-    </v-btn>
-  </template>
+  <v-btn
+    icon
+    :color="color"
+    :dark="dark"
+    :loading="loading"
+    :disabled="disabled"
+    @click="onClick"
+  >
+    <v-icon>{{ icon }}</v-icon>
+  </v-btn>
+</template>
 
-  <script setup lang="ts">
+<script setup lang="ts">
   import { defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
@@ -35,7 +42,6 @@
   const onClick = (event: Event) => {
     emit('click', event);
   };
-  </script>
+</script>
 
-  <style scoped>
-  </style>
+<style scoped></style>

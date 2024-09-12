@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { Download } from "@/types";
+import { defineStore } from 'pinia';
+import { Download } from '@/types';
 
 export interface PrivateDownloadState {
   download: Download | null;
@@ -7,14 +7,16 @@ export interface PrivateDownloadState {
   loading: boolean;
   error: string | null;
   totalDownloadCount: number; // Add this line
+  downloadsByRender: Download[];
 }
 
-export const usePrivateDownloadState = defineStore("downloads-private", {
+export const usePrivateDownloadState = defineStore('downloads-private', {
   state: (): PrivateDownloadState => ({
     download: null,
     downloads: [],
     loading: false,
     error: null,
     totalDownloadCount: 0, // Initialize here
-  }),
+    downloadsByRender: []
+  })
 });

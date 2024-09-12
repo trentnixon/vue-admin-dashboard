@@ -1,6 +1,6 @@
-import { Team } from "./team";
-import { Grade } from "./grade";
-import { Download } from "./download";
+import { Team } from './team';
+import { Grade } from './grade';
+import { Download } from './download';
 
 export interface GameMetaDataAttributes {
   round: string;

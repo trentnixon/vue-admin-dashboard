@@ -4,5 +4,5 @@
 </template>
 
 <script setup lang="ts">
-import AllDataContainer from "../../components/DataTesting/allDataContainer.vue";
+  import AllDataContainer from '../../components/DataTesting/allDataContainer.vue';
 </script>

@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col cols="12">
-        <v-alert v-if="loading" type="info" class="mb-4"> Loading... </v-alert>
+        <v-alert v-if="loading" type="info" class="mb-4">Loading...</v-alert>
         <v-alert v-if="error" type="error" class="mb-4">
           Error: {{ error }}
         </v-alert>
@@ -39,7 +39,7 @@
             Age Group: {{ library.attributes.AgeGroup }}
           </v-card-subtitle>
           <v-card-text>
-            <p>Active: {{ library.attributes.isActive ? "Yes" : "No" }}</p>
+            <p>Active: {{ library.attributes.isActive ? 'Yes' : 'No' }}</p>
             <p>Asset Type: {{ library.attributes.AssetType }}</p>
           </v-card-text>
         </v-card>
@@ -49,20 +49,20 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { useAccountMediaLibraryStore } from "@/store/accountMediaLibrary";
-import { storeToRefs } from "pinia";
-import { useRoute } from "vue-router";
+  import { onMounted } from 'vue';
+  import { useAccountMediaLibraryStore } from '@/store/accountMediaLibrary';
+  import { storeToRefs } from 'pinia';
+  import { useRoute } from 'vue-router';
 
-const route = useRoute();
-const accountId = Number(route.params.id);
+  const route = useRoute();
+  const accountId = Number(route.params.id);
 
-const accountMediaLibraryStore = useAccountMediaLibraryStore();
-const { accountMediaLibraries, loading, error } = storeToRefs(
-  accountMediaLibraryStore
-);
+  const accountMediaLibraryStore = useAccountMediaLibraryStore();
+  const { accountMediaLibraries, loading, error } = storeToRefs(
+    accountMediaLibraryStore
+  );
 
-onMounted(() => {
-  accountMediaLibraryStore.fetchAccountMediaLibraries(accountId);
-});
+  onMounted(() => {
+    accountMediaLibraryStore.fetchAccountMediaLibraries(accountId);
+  });
 </script>
