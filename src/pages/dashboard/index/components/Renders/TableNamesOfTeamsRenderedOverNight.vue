@@ -65,11 +65,8 @@
   const loading = ref(true);
   const rendersStore = useRendersStore();
 
-  const {
-    listRendersInLast24Hours,
-    previous24HoursStats,
-    totalRendersScheduled
-  } = storeToRefs(rendersStore);
+  const { listRendersInLast24Hours, previous24HoursStats } =
+    storeToRefs(rendersStore);
 
   // Computed properties
   const overnightRenders = computed(() => {

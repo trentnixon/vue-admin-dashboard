@@ -4,24 +4,27 @@
       {{ title }}
     </template>
   </ViewTitleBanner>
-  // things we would like to know // Accounts updating now, accounts result
-  fethcing now // Accounts updating past 24 hours, accounts result fethcing 24
-  hours
-
+  <template v-if="overnightRenders > 0">
+    <SectionContainerWithTitle>
+      <template #title>Previous 24 Hours</template>
+      <template #content>
+        <v-row>
+          <v-col cols="4">
+            <OverNightRendersCard />
+          </v-col>
+          <v-col cols="4">
+            <DownloadsCompletedCard />
+          </v-col>
+          <v-col cols="4">
+            <ErrorsOccurredCard />
+          </v-col>
+        </v-row>
+      </template>
+    </SectionContainerWithTitle>
+  </template>
   <SectionContainerWithTitle>
-    <template #title>Previous 24 Hours</template>
+    <template #title>Render State</template>
     <template #content>
-      <v-row>
-        <v-col cols="4">
-          <OverNightRendersCard />
-        </v-col>
-        <v-col cols="4">
-          <DownloadsCompletedCard />
-        </v-col>
-        <v-col cols="4">
-          <ErrorsOccurredCard />
-        </v-col>
-      </v-row>
       <v-row>
         <v-col cols="6"><StillProcessingCard /></v-col>
         <v-col cols="6"><ScheduledRendersNext24HoursCard /></v-col>
@@ -29,13 +32,23 @@
     </template>
   </SectionContainerWithTitle>
   <SectionContainerWithTitle>
-    <template #title>Teams Rendered Overnight</template>
+    <template #title>Accounts Rendered Overnight</template>
     <template #content>
       <v-row>
         <v-col cols="12">
           <TableNamesOfTeamsRenderedOverNight />
         </v-col>
-        <v-col cols="12">TableNamesOfAccounts rendering tomorrow</v-col>
+      </v-row>
+    </template>
+  </SectionContainerWithTitle>
+
+  <SectionContainerWithTitle>
+    <template #title>Accounts Scheduled for Tomorrow</template>
+    <template #content>
+      <v-row>
+        <v-col cols="12">
+          <TableOfAccountsWithRendersDueTomorrow />
+        </v-col>
       </v-row>
     </template>
   </SectionContainerWithTitle>
@@ -45,7 +58,7 @@
 
 <script setup lang="ts">
   import ViewTitleBanner from '@/components/common/builds/ViewTitleBanner.vue';
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   //
   import OverNightRendersCard from '@/pages/dashboard/index/components/OverNightRendersCard.vue';
   import DownloadsCompletedCard from '@/pages/dashboard/index/components/DownloadsCompletedCard.vue';
@@ -64,11 +77,13 @@
   import { useSchedulerStore } from '@/store/scheduler';
   import { useRendersStore } from '@/store/renders';
   import SectionContainerWithTitle from '@/components/common/builds/SectionContainerWithTitle.vue';
+  import { storeToRefs } from 'pinia';
+  import TableOfAccountsWithRendersDueTomorrow from '@/pages/dashboard/index/components/Renders/TableOfAccountsWithRendersDueTomorrow.vue';
   const accountStore = useAccountStore();
   const ordersStore = useOrdersStore();
   const schedulerStore = useSchedulerStore();
   const rendersStore = useRendersStore();
-
+  const { rendersInLast24Hours } = storeToRefs(rendersStore);
   onMounted(() => {
     accountStore.fetchAccounts().then(() => {
       accountStore.fetchAccounts();
@@ -77,6 +92,8 @@
     schedulerStore.fetchAllSchedulers();
     rendersStore.fetchAllRenders();
   });
+
+  const overnightRenders = computed(() => rendersInLast24Hours.value);
 </script>
 
 <style scoped>

@@ -54,6 +54,8 @@ export async function fetchSchedulersDueTomorrow() {
     state.loading = true;
     const response = await fetchSchedulersDueTomorrowFromService();
     if (response && response.data) {
+      console.log('response.data ', response.data);
+      state.schedulersDueTomorrowOBJ = response.data;
       state.schedulersDueTomorrow = response.data.length;
       console.log(
         'Fetched schedulers due tomorrow:',

@@ -100,3 +100,8 @@ export const activeSchedulersThisWeek = computed(() => {
 
   return counts;
 });
+
+export const schedulersScheduledForTomorrow = computed(() => {
+  const state = usePrivateSchedulerState();
+  return state.schedulersDueTomorrowOBJ; // Return the array of schedulers
+});
