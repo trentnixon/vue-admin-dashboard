@@ -1,14 +1,24 @@
 <template>
-  <v-btn
-    icon
-    :color="color"
-    :dark="dark"
-    :loading="loading"
-    :disabled="disabled"
-    @click="onClick"
-  >
-    <v-icon>{{ icon }}</v-icon>
-  </v-btn>
+  <v-tooltip top>
+    <template v-slot:activator="{ on, attrs }">
+      <span v-bind="attrs" v-on="on">
+        <v-btn
+          icon
+          :color="color"
+          :dark="dark"
+          :size="size"
+          :loading="loading"
+          :disabled="disabled"
+          :variant="variant"
+          @click="onClick"
+        >
+          <v-icon>{{ icon }}</v-icon>
+        </v-btn>
+      </span>
+    </template>
+    <span>{{ tooltip }}</span>
+    <v-tooltip activator="parent" location="top">{{ tooltip }}</v-tooltip>
+  </v-tooltip>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +31,7 @@
     },
     dark: {
       type: Boolean,
-      default: true
+      default: false
     },
     icon: {
       type: String,
@@ -34,6 +44,24 @@
     disabled: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'default'
+    },
+    variant: {
+      type: String as () =>
+        | 'tonal'
+        | 'flat'
+        | 'text'
+        | 'elevated'
+        | 'outlined'
+        | 'plain',
+      default: 'tonal'
+    },
+    tooltip: {
+      type: String,
+      default: ''
     }
   });
 

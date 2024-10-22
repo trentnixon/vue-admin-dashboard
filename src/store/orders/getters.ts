@@ -26,10 +26,10 @@ export const getOrderById = (id: number) => {
 
 export const calculateTotalRevenue = computed(() => {
   const allOrders = orders.value;
-  console.log('allOrders ', allOrders);
-  return allOrders.reduce((total, order) => {
+  const totalCents = allOrders.reduce((total, order) => {
     return total + parseFloat(order.attributes.total);
   }, 0);
+  return totalCents / 100; // Convert cents to dollars and format to 2 decimal places
 });
 
 export const calculateAverageOrderValue = computed(() => {

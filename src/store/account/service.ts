@@ -6,5 +6,5 @@ export async function fetchAccountsFromService() {
 }
 
 export async function fetchAccountDetailsFromService(id: number) {
-  return fetcher.get<{ data: Account }>(`/accounts/${id}?populate=*`);
+  return fetcher.get<{ data: Account }>(`/accounts/${id}`);
 }

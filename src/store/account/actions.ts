@@ -14,6 +14,7 @@ export async function fetchAccounts() {
   try {
     state.loading = true;
     const response = await fetchAccountsFromService();
+    console.log('[response]', response);
     if (response && response.data) {
       state.accounts = response.data;
     } else {

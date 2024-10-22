@@ -85,9 +85,7 @@
   const rendersStore = useRendersStore();
   const { rendersInLast24Hours } = storeToRefs(rendersStore);
   onMounted(() => {
-    accountStore.fetchAccounts().then(() => {
-      accountStore.fetchAccounts();
-    });
+    accountStore.fetchAccounts();
     ordersStore.fetchOrders();
     schedulerStore.fetchAllSchedulers();
     rendersStore.fetchAllRenders();
