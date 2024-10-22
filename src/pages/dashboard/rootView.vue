@@ -85,10 +85,10 @@
   const rendersStore = useRendersStore();
   const { rendersInLast24Hours } = storeToRefs(rendersStore);
   onMounted(() => {
-    accountStore.fetchAccounts();
-    /*  ordersStore.fetchOrders();
+    /* accountStore.fetchAccounts(); */
+    ordersStore.fetchOrders();
     schedulerStore.fetchAllSchedulers();
-    rendersStore.fetchAllRenders(); */
+    rendersStore.fetchAllRenders();
   });
 
   const overnightRenders = computed(() => rendersInLast24Hours.value);
